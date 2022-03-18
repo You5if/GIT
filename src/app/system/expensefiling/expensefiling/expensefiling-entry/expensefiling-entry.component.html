@@ -1,0 +1,204 @@
+<form [dir]="direction" #expensefilingForm="ngForm"  >
+  <div  class="cardMain">
+    <div class="bigMain" fxLayout>
+      <h3 class="fontY">
+        {{ dialog_title  }} 
+      </h3>
+      <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/close.png" alt="">
+    </div>
+  
+    <div class="add_section" fxLayoutWrap fxLayoutGap="10px">
+      <section fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="center top">
+        <mat-list fxLayout.gt-xs="row" fxLayout.xs="column" >
+          <mat-list-item>            <mat-form-field appearance="outline"> <mat-label>Entry date</mat-label>          <input matInput name="entryDate" placeholder="{{entryDate}}" type="date" [(ngModel)] = "pModel.entryDate" [readonly]= "pModel.readOnly"  >            </mat-form-field>          </mat-list-item>
+
+          <mat-list-item>
+            <mat-form-field appearance="outline">
+              <mat-label>Currency</mat-label> 
+              <mat-select matNativeControl name="currency" [placeholder]="currency"
+                [(ngModel)]="pModel.currency" [disabled]="pModel.readOnly">
+                <mat-option *ngFor="let item of currencyType" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </mat-list-item>
+
+            <mat-list-item>
+              <mat-form-field appearance="outline">
+                <mat-label>From account</mat-label>
+                <mat-select matNativeControl name="fromAccount" [placeholder]="fromAcc"
+                  [(ngModel)]="pModel.fromAccount" [disabled]="pModel.readOnly">
+                  <mat-option *ngFor="let item of accountType" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </mat-list-item>
+        </mat-list>
+
+        <mat-list fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap.gt-md="15px">
+          <mat-list-item>
+            <mat-form-field appearance="outline">
+              <mat-label>To account</mat-label>
+              <mat-select matNativeControl name="toAccount" [placeholder]="toAcc"
+                [(ngModel)]="pModel.toAccount" [disabled]="pModel.readOnly">
+                <mat-option *ngFor="let item of accountType" [value]="item.id">
+                  {{item.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+            </mat-list-item>
+            <mat-list-item>
+              <mat-form-field appearance="outline">
+                <mat-label>Payment type</mat-label>
+                <mat-select matNativeControl name="paymentType" [placeholder]="paymentType"
+                  [(ngModel)]="pModel.paymentType" [disabled]="pModel.readOnly">
+                  <mat-option *ngFor="let item of paymentTypeArray" [value]="item.id">
+                    {{item.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              </mat-list-item>
+              <mat-list-item></mat-list-item>
+
+                    <!-- Fields come here -->
+                </mat-list>
+                <mat-list fxLayout.gt-xs="row" fxLayout.xs="column" fxLayoutGap.gt-md="15px">
+                  <mat-list-item *ngIf="AE">            <div class="expenseCode"><h3>{{expenseCode}}</h3> </div>         </mat-list-item>
+                  <mat-list-item *ngIf="!AE">            <mat-form-field appearance="outline"> <mat-label>Expense code</mat-label>             <input matInput name="expenseCode" placeholder="expense code" type="text" [(ngModel)] = "pModel.expenseCode" [readonly]= "pModel.readOnly"  >            </mat-form-field>          </mat-list-item>
+
+                  <mat-list-item>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Reference</mat-label>
+                      <input matInput name="reference" placeholder="reference" type="text" [(ngModel)] = "pModel.reference" [readonly]= "pModel.readOnly"  >
+                    </mat-form-field>
+                  </mat-list-item>
+
+                  <mat-list-item>
+                    <mat-form-field appearance="outline">
+                      <mat-label>Remarks</mat-label>
+                      <input matInput name="remarks" placeholder="Remarks" type="text" [(ngModel)] = "pModel.remarks" [readonly]= "pModel.readOnly"  >
+                    </mat-form-field>
+                  </mat-list-item>
+
+                </mat-list>
+
+                  </section>
+                  <section class="section">
+                    
+                    <mat-table style="width: 100%; height: 180px; overflow-y: auto; border-radius: 10px;" [dataSource]="expenseFilingItemDataSource.data"
+                    class="mat-elevation-z8">
+                    <ng-container matColumnDef="item">
+                      <mat-header-cell *matHeaderCellDef>{{itemE}}</mat-header-cell>
+                      <mat-cell mat-cell *matCellDef="let row">
+                        <mat-form-field>
+                          <input matInput name="itemName" [(ngModel)]="row.itemName" type="text"
+                            [ngModelOptions]="{standalone: true}">
+                        </mat-form-field>
+                      </mat-cell>
+                      </ng-container>
+                      <ng-container matColumnDef="amount">
+                        <mat-header-cell *matHeaderCellDef>{{amountE}}</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let row">
+                          <mat-form-field>
+                            <input matInput name="amount" (input)="onAmountChange($event.target.value)" [(ngModel)]="row.amount" type="textbox"
+                            appIsDecimalDirective
+                              [ngModelOptions]="{standalone: true}">
+                          </mat-form-field>
+                        </mat-cell>
+                        </ng-container>
+                    <ng-container matColumnDef="itemDelete">
+                      <mat-header-cell *matHeaderCellDef style="padding-right: 0px">{{deleteE}}</mat-header-cell>
+                      <mat-cell mat-cell *matCellDef="let element;let i = index" style="margin-right: 0px; padding-right: 0px">
+                        <button mat-icon-button type="button" (click)="onDeleteExpenseFilingItem(i)">
+                          <mat-icon small class="delete" role="img" aria-hidden="true" color="warn">
+                            delete
+                          </mat-icon>
+                        </button>
+                      </mat-cell>
+                    </ng-container>
+                    <mat-header-row *matHeaderRowDef="expenseFilingItemDisplayedColumns; sticky: true"></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: expenseFilingItemDisplayedColumns; ">
+                    </mat-row>
+                    </mat-table>
+                    <div class="cen">
+                      <button mat-raised-button  class="add_btn" type="button" (click)="addExpenseFilingItemRecord()">
+                        + Add item
+                        </button>
+                    </div>
+                    </section>
+                    <section class="section">
+                      
+                      <mat-table style="width: 100%; height: 180px; overflow-y: auto; border-radius: 10px;" [dataSource]="expenseFilingTaxDataSource"
+                      class="mat-elevation-z8">
+                      <ng-container matColumnDef="tax">
+                        <mat-header-cell *matHeaderCellDef>{{taxE}}</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let row">
+                          <mat-form-field>
+                            <mat-select  [(ngModel)]="row.taxId" [ngModelOptions]="{standalone: true}">
+                              <mat-option (click)="onChangeDrop(type.id)" *ngFor="let type of taxType" [value]="type.id">
+                                {{type.name}}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </mat-cell>
+                        </ng-container>
+                      <ng-container matColumnDef="taxDelete">
+                        <mat-header-cell *matHeaderCellDef style="padding-right: 0px">{{deleteE}}</mat-header-cell>
+                        <mat-cell mat-cell *matCellDef="let element;let i = index" style="margin-right: 0px; padding-right: 0px">
+                          <button mat-icon-button type="button" (click)="onDeleteExpenseFilingTax(i)">
+                            <mat-icon small class="delete" role="img" aria-hidden="true">
+                              delete
+                            </mat-icon>
+                          </button>
+                        </mat-cell>
+                      </ng-container>
+                      <mat-header-row  *matHeaderRowDef="expenseFilingTaxDisplayedColumns; sticky: true"></mat-header-row>
+                      <mat-row *matRowDef="let row; columns: expenseFilingTaxDisplayedColumns; ">
+                      </mat-row>
+                      </mat-table>
+                      <div class="cen">
+                        <button mat-raised-button  class="add_btn" type="button" (click)="addExpenseFilingTaxRecord()">
+                          + Add tax
+                          </button>
+                      </div>
+                      </section>
+                    </div>
+<div class="bot" fxLayout>
+  <div class="botTotal">
+    <div fxLayout fxLayoutGap="5px">
+      <h4 class="fontY2">
+        {{subTotalE}}
+      </h4>
+      <h4 class="fontY2">:</h4>
+      <h4 class="fontY2">
+        {{ subTotal }}
+      </h4>
+    </div>
+    <div fxLayout fxLayoutGap="5px">
+      <h4 class="fontY2">
+        {{totalE}}
+      </h4>
+      <h4 class="fontY2">:</h4>
+      <h4 class="fontY2">
+        {{ total }}
+      </h4>
+    </div>
+  </div>
+  <!-- <div class="btn-container" fxLayoutGap="10px">
+    <button class="BtnC" (click)="onCancel()" mat-button color="warn">{{cancel}}</button>
+    <button class="BtnS" (click)="onSubmit()" mat-button color="primary" >{{submit}}</button>
+  </div> -->
+  <div class="btn-container" fxLayoutGap="10px">
+  
+  <button class="BtnC" type="button" mat-button (click)="onCancel(); $event.preventDefault()">{{cancel}}</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'"  
+    type="button" mat-button class="BtnS" (click)="onSubmit(expensefilingForm.value); $event.preventDefault()">{{submit}}</button>
+  <!-- <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'"  
+  [disabled]="expensefilingForm.invalid"
+    type="submit" mat-button class="BtnS">{{submit}}</button> -->
+</div>
+                  </div>
+                </div>
+</form>

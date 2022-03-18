@@ -1,0 +1,140 @@
+.mat-dialog-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+// .cardMain {
+//   height: 600px;
+// }
+.section {
+  margin-right: 5px !important;
+  margin-left: 5px !important;
+  margin-top: 20px;
+}
+.expenseCode {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.cancel_Img {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.Main {
+  width: 100%;
+
+  height: 100%;
+}
+.bigMain {
+  width: 100%;
+  padding: 0 0 0 10px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.fontY {
+  font-size: 30px !important;
+
+  font-weight: lighter;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+.fontY2 {
+  font-size: 20px !important;
+
+  font-weight: lighter;
+}
+.bot {
+  display: flex;
+  align-items: center;
+}
+.botTotal {
+  width: 100%;
+  display: flex;
+  padding: 0 20px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.BtnS {
+  outline: none;
+  border: none;
+  width: 100px;
+  color: white;
+  background: #05c46b;
+}
+.delete {
+  color: #ff3f34;
+}
+.BtnC {
+  outline: none;
+  border: none;
+  width: 100px;
+
+  background: #e9e9e9;
+  color: black;
+}
+.btn-container {
+  width: 100%;
+  display: flex;
+  margin-top: 12px;
+
+  justify-content: flex-end;
+}
+
+.cen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.add_btn {
+  background: #20bf6b;
+  outline: none;
+  border: none;
+  margin: 10px 8px;
+
+  color: white;
+}
+
+.Btn {
+  outline: none;
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.cardForm {
+  margin: 10px;
+  width: 100%;
+}
+.cardForm .mat-form-field {
+  padding: 5px;
+}
+
+.add_section {
+  margin-top: 20px;
+  width: 100%;
+  height: 400px;
+  padding-top: 20px;
+  padding-bottom: 50px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.check {
+  display: flex;
+  align-items: center;
+}
+.add_section::-webkit-scrollbar {
+  width: 5px;
+}
+.add_section::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #737272;
+  border: 1px solid #737272;
+}

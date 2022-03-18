@@ -1,0 +1,137 @@
+<mat-toolbar>
+
+  <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
+
+    <section class="fontY">
+      {{header}}
+    </section>
+
+    <section class="sec"  >
+
+      <button class="add_btn" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <!-- <button class="add_btnS" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btnW" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btnG" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btn2" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btn3" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btn4" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button>
+      <button class="add_btn5" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button> -->
+      <!-- <button mat-button color="primary" (click)="openEntry()">Filter</button> -->
+      <!-- <button mat-button color="primary" (click)="onSort()">Sort</button>
+      <button mat-button color="primary" (click)="openEntry()" [disabled]="!screenRights.printFlag">Print</button> -->
+      <!-- <button mat-button color="primary" (click)="refreshMe()">Refresh</button> -->
+
+      <!-- <mat-form-field [ngStyle]="{'float':'right', 'margin-right':'60px'}">
+
+        <input matInput (keyup)="applyFilter($event.target.value)">
+
+        <mat-placeholder>
+
+          <mat-icon>search</mat-icon>
+
+        </mat-placeholder>
+
+      </mat-form-field> -->
+
+    </section>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- <Section [ngClass]="['custom-table-container']"> -->
+<Section [dir]="direction" fxHide.xs class="toolSection" mat-elevation-z8>
+
+  <mat-table #table [dataSource]="dataSource" id="table"  style="width: 100%">
+
+    <!-- Columns definition here to be displayed -->
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell  class="cbPad"   *matHeaderCellDef>
+        <mat-checkbox
+        class="chB" (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+</mat-checkbox>
+      </mat-header-cell>
+       <mat-cell class="cbPad" *matCellDef="let row; let i = index">
+        <mat-checkbox (click)="$event.stopPropagation();"
+                    (change)="$event ? selection.toggle(row) : null; onId(i,row)"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+
+      </mat-cell>
+
+  </ng-container>
+    <ng-container matColumnDef="AccountCode">      <mat-header-cell class="centH" *matHeaderCellDef>{{accountCode}}</mat-header-cell>     <mat-cell class="cent" mat-cell *matCellDef="let row">{{row.accountCode}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="AccountName">      <mat-header-cell class="centH" *matHeaderCellDef>{{accountName}}</mat-header-cell>     <mat-cell class="cent" mat-cell *matCellDef="let row">{{row.accountName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="AccountType">      <mat-header-cell class="centH" *matHeaderCellDef>{{accountType}}</mat-header-cell>     <mat-cell  class="cent" mat-cell *matCellDef="let row">{{row.accountTypeName}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="balance">      <mat-header-cell class="centH" *matHeaderCellDef>{{balance}}</mat-header-cell>     <mat-cell class="cent" mat-cell *matCellDef="let row">0</mat-cell>
+    </ng-container>
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell class="cent" *matHeaderCellDef>{{edit}}</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <button class="Btn" mat-icon-button color="primary" (click)="onEdit(row.accountId)" [disabled]="!screenRights.editFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="headerRow" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;" [class.active]="clickedRows.has(row)" ></mat-row>
+
+  </mat-table>
+
+</Section>
+
+<section [dir]="direction" class="cards_section" fxShow.xs>
+  <div *ngFor="let index of indexes">
+    <mat-card fxLayout class="card">
+      <div >
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{accountCode}}</h3>
+          <h3>:</h3>
+          <h3>{{ index.accountCode }}</h3>
+        </div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{accountType}}</h3>
+          <h3>:</h3>
+          <h3>{{ index.accountType }}</h3>
+        </div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{accountName}}</h3>
+          <h3>:</h3>
+          <h3>{{ index.accountName }}</h3>
+        </div>
+      </div>
+      <div>
+        <!-- <button class="Btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onEdit(index.accountId)" class="Btn" mat-menu-item>{{edit}}</button>
+  
+</mat-menu> -->
+      </div>
+    </mat-card>
+
+  </div>
+</section>
+<div class="paginator">
+
+  <mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="paginatoryOperation($event)" showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+<!-- <button (click)="onId()">
+  id
+</button> -->
+

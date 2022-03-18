@@ -1,0 +1,45 @@
+// .containerThumbs {
+//   display: flex;
+//   width: 100%;
+// }
+
+// .cardThumbs {
+//   margin-top: 0px;
+//   flex: 1;
+// }
+
+// .containerchart {
+//   display: flex;
+//   width: 100%;
+// }
+
+// .cardMothlyEarnings {
+//   margin-left: 10px;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   flex: 3;
+// }
+
+// .cardSalesAnalytics {
+//   margin-right: 10px;
+//   margin-top: 10px;
+//   margin-bottom: 10px;
+//   flex: 2;
+// }
+
+// .containerchartthumbs {
+//   display: flex;
+//   width: 100%;
+//   // margin-left: 10px;
+//   // margin-right: 10px;
+// }
+
+// // .cardChartThumbs {
+// //     flex: 1;   
+// // }
+div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 80vh;
+}

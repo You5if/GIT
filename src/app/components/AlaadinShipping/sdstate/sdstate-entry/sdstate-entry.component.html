@@ -1,0 +1,23 @@
+<form #sdstateForm="ngForm" (ngSubmit)="onSubmit(sdstateForm.value)">
+  <mat-card class="cardMain">
+    <mat-card-title>{{dialog_title}}</mat-card-title>
+    <mat-card-content fxLayoutWrap fxLayoutGap="10px">
+      <section fxLayout="column" fxLayoutGap.gt-md="20px" fxLayoutAlign="center top">
+                  <mat-list fxLayout="row" fxLayoutGap.gt-md="15px">
+                      <!-- Fields come here -->
+
+          <mat-list-item>            <mat-form-field>              <input matInput name="state" placeholder="state" type="text" [(ngModel)] = "pModel.state" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="sdCountryId" placeholder="sdCountryId" type="number" [(ngModel)] = "pModel.sdCountryId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+
+                      <!-- Fields come here -->
+                  </mat-list>
+              </section>
+    </mat-card-content>
+<mat-card-actions style="text - align: center">
+                    <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button color="success" [disabled]="sdstateForm.invalid"
+                      type="submit">Submit</button>
+                    <button *ngIf="pModel.entryMode=='D'" mat-raised-button color="warn" [disabled]="sdstateForm.invalid" type="submit">Delete</button>
+                    <button mat-raised-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+</mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,36 @@
+<div class="example-container mat-elevation-z8">
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- Preview -->
+    <ng-container matColumnDef="preview">
+      <mat-header-cell *matHeaderCellDef style="min-width:60px;"></mat-header-cell>
+      <mat-cell *matCellDef="let row" style="min-width:60px;"><img [src]="row.apiImagePath"
+          class="myimage" /></mat-cell>
+    </ng-container>
+    <!-- File Name -->
+    <ng-container matColumnDef="originalFileName">
+      <mat-header-cell *matHeaderCellDef style="min-width:70%;">File Name</mat-header-cell>
+      <mat-cell *matCellDef="let row" style="min-width:70%;">{{ row.originalFileName }}
+      </mat-cell>
+    </ng-container>
+    <!-- download Column -->
+    <ng-container matColumnDef="download">
+      <mat-header-cell *matHeaderCellDef>Download</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button mat-icon-button color="primary"
+          (click)="onDownload(row.apiPath)">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="primary">cloud_download
+          </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+    <!-- delete Column -->
+    <!-- <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button mat-icon-button color="primary" (click)="onDelete(row.fileName)">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container> -->
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</div>

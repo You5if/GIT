@@ -1,0 +1,380 @@
+
+
+<section class="section" [dir]="direction">
+  <div class="bigMain" fxLayout>
+    <h3 class="fontY">
+      {{ dialog_title  }} 
+    </h3>
+    <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/close.png" alt="">
+  </div>
+
+  
+
+  <div class="twoSides">
+    <div class="secContent">
+      <form class="Main"  [dir]="direction"  >
+        <div class="container">
+          <mat-grid-list
+            [cols]="breakpoint"
+            rowHeight="105px"
+            (window:resize)="onResize($event)"
+    
+          >
+            <div  *ngFor="let source of light">
+              <div [ngSwitch]="source.type">
+                <mat-grid-tile *ngSwitchCase="'Date'">
+                  <div [ngSwitch]="source.access">
+                    <mat-form-field class="dateInput" *ngSwitchCase="'Editable'" appearance="outline">
+                      <mat-label>{{ source.label }}</mat-label>
+                      <input
+                        matInput
+                        [(ngModel)]="source.value"
+                        name="{{ source.label }}"
+                        type="datetime-local"
+                        placeholder="Date"
+                      />
+    
+    
+                    </mat-form-field>
+                    <div
+                    *ngSwitchCase="'ViewOnly'"
+                    fxLayout
+                    fxLayoutGap="10px"
+    
+                    class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+    
+                  </div>
+    
+                </mat-grid-tile>
+                <mat-grid-tile *ngSwitchCase="'Number'">
+                  <div [ngSwitch]="source.access">
+                    <mat-form-field  *ngSwitchCase="'Editable'" appearance="outline">
+                      <mat-label>{{ source.label }}</mat-label>
+                      <input
+                        matInput
+                        [(ngModel)]="source.value"
+                        name="{{ source.label }}"
+                        type="textbox"
+                        
+                        placeholder="Number"
+                        appIsDecimalDirective
+                      />
+    
+    
+                    </mat-form-field>
+    
+                    <div
+                      fxLayout
+                      fxLayoutGap="10px"
+                      *ngSwitchCase="'ViewOnly'"
+                      class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+                  </div>
+                </mat-grid-tile>
+    
+                <mat-grid-tile *ngSwitchCase="'Text'">
+                  <div [ngSwitch]="source.access">
+                    <mat-form-field *ngSwitchCase="'Editable'" appearance="outline">
+                      <mat-label>{{ source.label }}</mat-label>
+                      <input
+                        matInput
+                        [(ngModel)]="source.value"
+                        name="{{ source.label }}"
+                        type="text"
+    
+                        placeholder="Type some text"
+                      />
+    
+    
+                    </mat-form-field>
+    
+                    <div
+                      fxLayout
+                      fxLayoutGap="10px"
+                      *ngSwitchCase="'ViewOnly'"
+                      class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+                  </div>
+                </mat-grid-tile>
+    
+                <mat-grid-tile *ngSwitchCase="'Checkbox'">
+                  <div [ngSwitch]="source.access">
+                    <mat-checkbox
+                    *ngSwitchCase="'Editable'"
+                    [ngModel]="source.value == 1 ? true : source.value == 0 ? false : null"
+                    (ngModelChange)="source.value = $event ? 1 : 0"
+    
+    
+                    name="{{ source.label }}"
+                    >{{ source.label }}</mat-checkbox
+                  >
+    
+                  <div
+                    fxLayout
+                    fxLayoutGap="10px"
+                    *ngSwitchCase="'ViewOnly'"
+                    class="radio"
+                  >
+                    <h3>{{ source.label }}:</h3>
+                    <h5>{{ source.value }}</h5>
+                  </div>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile *ngSwitchCase="'Time'">
+                  <div [ngSwitch]="source.access">
+                    <mat-form-field *ngSwitchCase="'Editable'" appearance="outline">
+                      <input
+                        [(ngModel)]="source.value"
+                        name="{{ source.label }}"
+                        matInput
+                        type="time"
+                        placeholder="start date"
+                      />
+                    </mat-form-field>
+    
+                    <div
+                      fxLayout
+                      fxLayoutGap="10px"
+                      *ngSwitchCase="'ViewOnly'"
+                      class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile *ngSwitchCase="'TextArea'">
+                  <div [ngSwitch]="source.access">
+                    <mat-form-field *ngSwitchCase="'Editable'" appearance="outline">
+                      <mat-label>{{ source.label }}</mat-label>
+                      <textarea
+                        matInput
+                        rows="2"
+                        [(ngModel)]="source.value"
+    
+                        name="{{ source.label }}"
+                        type="text"
+                        placeholder="Type some text"
+                      ></textarea>
+    
+    
+                    </mat-form-field>
+    
+                    <div
+                      fxLayout
+                      fxLayoutGap="10px"
+                      *ngSwitchCase="'ViewOnly'"
+                      class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+                  </div>
+                </mat-grid-tile>
+                <mat-grid-tile *ngSwitchCase="'dropdown'">
+                  <div [ngSwitch]="source.access">
+                    <div *ngSwitchCase="'Editable'">
+                      <div *ngIf="source.tableColumnId == 28">
+                        <div fxLayout="column">
+                          <mat-checkbox [(ngModel)]="checkParentAccountId" (change)="onParent()" name="parent">is sub-account</mat-checkbox>
+                        <mat-form-field *ngIf="checkParentAccountId"  appearance="fill">
+                          <mat-label>{{ source.label }}</mat-label>
+                          <mat-select
+                            [(ngModel)]="+source.value"
+                            name="{{ source.label }}"
+                          >
+                            <mat-option
+                              *ngFor="let choice of source.myarray"
+                              [value]="choice.id"
+                            >
+                              {{ choice.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        </div>
+                      </div>
+                      <div *ngIf="source.tableColumnId != 28">
+                        <mat-form-field  appearance="fill">
+                          <mat-label>{{ source.label }}</mat-label>
+                          <mat-select
+                            [(ngModel)]="+source.value"
+                            name="{{ source.label }}"
+                          >
+                            <mat-option
+                              *ngFor="let choice of source.myarray"
+                              [value]="choice.id"
+                            >
+                              {{ choice.name }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        
+                      </div>
+                    </div>
+    
+                    <div
+                      fxLayout
+                      fxLayoutGap="10px"
+                      *ngSwitchCase="'ViewOnly'"
+                      class="radio"
+                    >
+                      <h3>{{ source.label }}:</h3>
+                      <h5>{{ source.value }}</h5>
+                    </div>
+                  </div>
+                </mat-grid-tile>
+    
+    
+                  <div *ngIf="spacezone">
+                    <mat-grid-tile *ngSwitchCase="'space'">
+                      <div [ngSwitch]="source.access">
+                        <div *ngSwitchCase="'Editable'" class="space"></div>
+    
+                      <div
+                        fxLayout
+                        fxLayoutGap="10px"
+                        *ngSwitchCase="'ViewOnly'"
+                        class="radio"
+                      >
+                        <h3>{{ source.label }}:</h3>
+                        <h5>{{ source.value }}</h5>
+                      </div>
+                      </div>
+                    </mat-grid-tile>
+                  </div>
+    
+              </div>
+            </div>
+          </mat-grid-list>
+        </div>
+      </form>
+      <div class="upload">
+        <div class="attach" >
+        
+          <!-- <img *ngIf="!showit" [src]="imagePathUrl"  alt="" width="100px" height="100px"> -->
+    
+          <!-- <mat-card  *ngIf="!showit" class="attachCard">
+            <h4 class="attachPlaceholder">Add some attachment ...</h4>
+          </mat-card> -->
+          <div fxLayout="column" fxLayoutGap="5px" *ngIf="showit">
+          <mat-card  *ngFor="let attach of attachments"  fxLayoutGap="15px" class="attachCard">
+            <div class="attachIcon"><i class="fas fa-paperclip"></i></div>
+               <div fxLayout="column" fxLayoutGap="5px">
+                <h4 class="attachments" ><a class="links" href="{{attach.attachmentDownload}}" target="_blank">{{attach.originalFileName}}</a></h4>
+                <h4 class="commentDate">{{attach.attachDate}}</h4>
+               </div>
+                <!-- <mat-divider></mat-divider> -->
+              
+              </mat-card>
+            </div>
+        </div>
+        
+    
+      </div>
+      <div  class="comment2">
+        <div >
+        
+          <!-- <img *ngIf="!showit" [src]="imagePathUrl"  alt="" width="100px" height="100px"> -->
+          <div  class="commentedCard">
+            <div   class="userComment">
+              
+                <mat-card fxLayout fxLayoutGap="5px">
+                  <form class="sendCommentForm">
+                    <mat-form-field  >
+                      <input  [ngModelOptions]="{standalone: true}" [(ngModel)]="newComment.comment" matInput placeholder="Leave a comment ...">
+                    </mat-form-field>
+                  </form>
+                  <h1 (click)="onNewComment()" class="sendBtn"><i class="fas fa-paper-plane"></i></h1>
+                </mat-card>
+              </div>
+             
+           
+          </div>
+          
+        </div>
+      </div>
+      <!-- <div *ngIf="!comment" class="commentText">
+        <h4 class="commentPlaceholder" (click)="onAddComment()">+ Add a comment</h4>
+      </div> -->
+      <div class="comment">
+        <div *ngFor="let comment of comments" class="attach" >
+        
+          <!-- <img *ngIf="!showit" [src]="imagePathUrl"  alt="" width="100px" height="100px"> -->
+  
+          <div *ngIf="!comment.edit"  class="commentedCard">
+            <div   class="userComment">
+              <div class="circle">
+                <h1 class="commentC">{{comment.appUserName.charAt(0).toUpperCase() }}</h1>
+              </div>
+              <div fxLayout="column">
+                <div fxLayout fxLayoutGap="10px">
+                  <h1 class="commentC">{{comment.displayName}}</h1>
+                <h4 class="commentDate">{{comment.commentDate}}</h4>
+                </div>
+                <mat-card>
+                  <h1 class="commentC">{{comment.comment}}</h1>
+                </mat-card>
+              </div>
+            </div>
+            <!-- <div fxLayout fxLayoutGap="20px">
+              <div class="editComment" (click)="onEditComment(comment)"><i class="fas fa-pen"></i></div>
+            <div class="deleteComment" (click)="onDeleteComment(comment)"><i class="far fa-trash-alt"></i></div>
+            </div> -->
+          </div>
+          <mat-card *ngIf="comment.edit" class="commentCard">
+            <form class="sendCommentForm">
+              <mat-form-field class="commentForm" >
+                <input class="commentInput" [ngModelOptions]="{standalone: true}" [(ngModel)]="editComment.comment" matInput placeholder="Edit comment ...">
+              </mat-form-field>
+              <h1 (click)="onNewEditComment()" class="sendBtn"><i class="fas fa-paper-plane"></i></h1>
+            </form>
+          </mat-card>
+          
+        </div>
+      </div>
+      
+      
+    </div>
+    <div class="secContent2" fxLayoutGap="5px">
+      <div>
+        <button mat-button class="BtnRightSide" [matMenuTriggerFor]="menu">Employees</button>
+        <!-- <button mat-button class="BtnRightSide">Customers</button> -->
+        <div >
+          <app-card-upload [myFiles]="lFiles" (onUploadFinished)="uploadFinished($event)"
+                      
+                      >
+          </app-card-upload>
+        </div>
+        <mat-menu #menu="matMenu" xPosition="after">
+          <div class="employeeCard">
+            
+              <div fxLayout="column">
+                <div *ngFor="let employee of employees" class="employeeNames">
+                  <h4 class="attachments" >{{employee.appUserName}}</h4>
+                  <div *ngIf="role === '2'" class="deleteComment" (click)="onDeleteUser(employee)"><i class="far fa-trash-alt"></i></div>
+                </div>
+              </div>
+              <button *ngIf="role === '2'" class="BtnS" (click)="onAddEmployee()" mat-button color="primary" type="submit">Add</button>
+            
+          </div>
+        </mat-menu>
+      </div>
+    </div>
+  </div>
+  <div class="btn-container" fxLayoutGap="10px">
+    <button class="BtnC" (click)="onCancel()" mat-button color="warn" type="submit">{{cancel}}</button>
+    <button class="BtnS" (click)="onSubmit()" mat-button color="primary" type="submit">{{submit}}</button>
+  </div>
+</section>
+
+

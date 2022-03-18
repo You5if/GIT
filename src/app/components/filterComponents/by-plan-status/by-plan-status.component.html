@@ -1,0 +1,21 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Plan Status
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+      <form [formGroup]="planStatusFilter">
+          <mat-form-field>
+                <mat-label>Plan Status</mat-label>
+                <mat-select multiple formControlName="planStatus"  (selectionChange)="onPlanStatusChange()">
+                    <mat-option value="Posted">Posted</mat-option>
+                    <mat-option value="Loaded">Loaded</mat-option>
+                    <mat-option value="Dispatch">Dispatch</mat-option>
+                    <mat-option value="Delivered">Delivered</mat-option>
+                    <mat-option value="Closed">Closed</mat-option>
+                </mat-select>
+          </mat-form-field>
+      </form>
+  </ng-template>
+</mat-expansion-panel>

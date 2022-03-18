@@ -1,0 +1,159 @@
+.topBar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
+// mat-icon:hover {
+//     cursor: pointer;
+// }
+
+// mat-card {
+//     width: 100%;
+//     margin: 0 2em;
+//     padding: 1em 1em 0 1em;
+//     transition: 0.3s;
+//     box-shadow: 2px 2px 5px grey;
+// }
+
+// mat-card:hover {
+//     cursor: pointer;
+//     box-shadow: 2px 2px 10px grey;
+// }
+
+// mat-card-content h1 {
+//     margin-top: 0.6em;
+//     opacity: 0.8;
+// }
+
+// .options {
+//     position: absolute;
+//     top: 0.3em;
+//     right: 0.2em;
+// }
+
+.container mat-icon {
+    opacity: 0.5;
+    transition: 0.3s;
+}
+
+.container mat-icon:hover {
+    opacity: 1;
+    width: 1.2em;
+}
+
+.bottomBar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+h3 {
+    font: 1.2em;
+    font-weight: bold;
+}
+
+b {
+    color: rgba(128, 128, 128, 0.8);
+}
+
+.add_image_icon {
+    position: absolute;
+    top: 6.2em;
+    right: 3em;
+    z-index: 20;
+    opacity: 0.5;
+}
+
+.add_image_icon:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+filter {
+    height: 100%;
+    overflow: scroll;
+}
+
+.hidden { 
+    display: none;
+}
+
+mat-card-header mat-icon {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+mat-card-content section {
+    width: 100%;
+}
+
+mat-card-content section div {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+mat-card-actions {
+    text-align: center
+}
+
+@media only screen and ( min-width:768px ) {
+    main {
+        width: 80%;
+        margin: 0 auto;
+        display: flex;
+        }
+        
+    section:nth-child(1) {
+        width: 40%;
+    }
+    
+    section:nth-child(2) {
+        width: 60%;
+    }            
+}
+            
+
+@media only screen and ( min-width: 1024px ) {
+    main {
+        width: 50%;
+    }
+}
+
+@media only screen and ( min-width: 1440px ) {
+    section:nth-child(1) {
+        width: 30%;
+    }
+    
+    section:nth-child(2) {
+        width: 70%;
+    }  
+}
+
+@media only screen and ( max-width: 768px ) {
+    .hideOnMob {
+        display: none;
+    }
+}
+
+@media only screen and ( min-width: 768px ) {
+    .hideOnDesk {
+        display: none;
+    }
+
+    img {
+        width: 95%;
+        margin: 1em;
+    }
+    mat-card-content mat-checkbox {
+        margin-right: 1em;
+    }
+}
+
+

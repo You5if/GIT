@@ -1,0 +1,64 @@
+<!-- <mat-toolbar>
+  <mat-icon class="add" (click)="onAdd()">add_circle</mat-icon>
+  <h1>Models</h1>
+</mat-toolbar>
+
+
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" [gutterSize]="'0.5'">
+  <mat-grid-tile *ngFor="let record of dataList">
+      <mat-card class="mat-elevation-z8">
+          <mat-card-title>
+              {{ record.carModel }}
+          </mat-card-title>
+          <mat-card-subtitle>
+              {{ record.carMake }}
+          </mat-card-subtitle>
+          <mat-card-actions>
+            <mat-icon [matMenuTriggerFor]="menu" class="options">more_vert</mat-icon>
+          </mat-card-actions>
+      </mat-card>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onView(record.sdCarModelId)" [disabled]="!screenRights.viewFlag">
+        View Model
+        </button>
+
+        <button mat-menu-item (click)="onEdit(record.sdCarModelId)" [disabled]="!screenRights.editFlag">
+        Edit Model
+        </button>
+
+      </mat-menu>
+  </mat-grid-tile>
+
+</mat-grid-list> -->
+
+<mat-toolbar>
+  <button mat-mini-fab (click)="onAdd()" color="accent">
+    <mat-icon>add</mat-icon>
+  </button>
+  <h1>Models</h1>
+  <span></span>
+</mat-toolbar>
+
+<div *ngFor="let record of dataList">
+  <mat-card>
+    <mat-card-header (click)="onView(record.sdCarModelId)">
+      <mat-card-title>{{ record.carModel }}</mat-card-title>
+      <mat-card-subtitle>{{ record.carMake }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-actions>
+      <mat-icon [matMenuTriggerFor]="menu" class="options">more_vert</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onEdit(record.sdCarModelId)" [disabled]="!screenRights.editFlag">
+      <mat-icon>edit</mat-icon>Edit Model
+    </button>
+    <button mat-menu-item (click)="onDelete(record.sdCarModelId)" *ngIf="role === '1'">
+      <mat-icon color="warn">delete</mat-icon>Delete
+    </button>
+  </mat-menu>
+</div>
+
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>

@@ -1,0 +1,43 @@
+.section {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
+  height: 600px;
+}
+.space {
+  width: 200px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 20px;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  width: 700px;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.radio {
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 100;
+}
+mat-radio-button {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+label {
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 100;
+}
+.textArea {
+  height: 35px;
+}

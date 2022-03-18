@@ -1,0 +1,20 @@
+<ng-template #notActivated>
+    <div>
+        <p>
+            Your account has expired. Reactivate your account
+        </p>
+    </div>
+  </ng-template>
+  
+  <ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+    <ng-container *ngTemplateOutlet="notActivated">
+    </ng-container>
+  </ng-template> 
+  
+  <ng-template #bigScreen>
+    <mat-card>
+      <ng-container *ngTemplateOutlet="notActivated">
+      </ng-container>  
+    </mat-card>
+  </ng-template> 
+  

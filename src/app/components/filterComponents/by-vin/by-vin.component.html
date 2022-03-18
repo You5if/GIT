@@ -1,0 +1,24 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          VIN
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form>
+      <mat-form-field>
+        <input [formControl]="vinAC" type="text" placeholder="Vin" maxlength="100" matInput
+        [matAutocomplete]="vinACC" (input)="onVinChange(vinAC.value)">
+        <mat-autocomplete #vinACC="matAutocomplete">
+        <mat-option *ngFor="let selectModel of filteredVin | async; let index = index"
+        [value]="selectModel.name" (onSelectionChange)="onVinSelect(selectModel.name)">
+        {{selectModel.name}}
+        </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+      <!-- <mat-form-field>
+        <input matInput type="text" placeholder="Enter Vin Code" name="vin" [(ngModel)]="vin" (input)="onVin()">
+      </mat-form-field> -->
+    </form>
+  </ng-template>
+</mat-expansion-panel>

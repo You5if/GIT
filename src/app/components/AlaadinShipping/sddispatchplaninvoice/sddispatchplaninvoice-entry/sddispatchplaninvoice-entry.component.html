@@ -1,0 +1,81 @@
+<div class="header">
+  <h1 mat-dialog-title>{{dialog_title}} Invoice</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form #sddispatchplaninvoiceForm="ngForm">
+    <div class="md-1">
+      <mat-form-field appearance="outline" class="md-top">
+        <mat-label>Invoice Date</mat-label>
+        <input matInput name="invoiceDate" [matDatepicker]="invoiceDate" [(ngModel)] = "pModel.invoiceDate" [readonly]= "pModel.readOnly" required >               <mat-datepicker-toggle matSuffix [for]="invoiceDate"></mat-datepicker-toggle>              <mat-datepicker #invoiceDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="md-mid-1">
+        <mat-label>Invoice</mat-label>
+        <input matInput name="invoiceNumber" type="text" [(ngModel)] = "pModel.invoiceNumber" [readonly]= "pModel.readOnly" required >
+      </mat-form-field>
+    </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="md-2">
+    <mat-form-field appearance="outline" class="md-mid-2">
+      <mat-label>Total Amount</mat-label>
+      <input matInput name="invoiceTotalAmount" type="number" [(ngModel)] = "pModel.invoiceTotalAmount" [readonly]= "pModel.readOnly" required >
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="md-bottom">
+      <mat-label>Invoice Status</mat-label>
+      <mat-select matNativeControl name="invoiceStatusId" [(ngModel)]="pModel.invoiceStatusId" [disabled]="pModel.readOnly">
+        <mat-option *ngFor="let item of statusTypes" [value]="item.id">
+        {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <!-- Fields come here -->
+
+
+  <section>
+  <!-- <button mat-raised-button style="margin:10px 8px;" type="button" (click)="addInvoiceRecord()">
+  +
+  </button> -->
+  <mat-table style="width: 100%; height: 230px; overflow-y: auto;" [dataSource]="invoiceDetailDataSource"
+  class="mat-elevation-z8">
+  <ng-container matColumnDef="invoiceDetailSrNo">
+  <mat-header-cell *matHeaderCellDef style="padding-left: 0px">Sr. No.</mat-header-cell>
+  <mat-cell *matCellDef="let row" style="padding-left: 0px">{{ row.srNo }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="invoiceDetailId">
+  <mat-header-cell *matHeaderCellDef style="padding-left: 0px">Supplier</mat-header-cell>
+  <mat-cell *matCellDef="let row" style="padding-left: 0px">{{ row.newItem }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="invoiceAmount">
+  <mat-header-cell *matHeaderCellDef style="padding-left: 0px">Amount</mat-header-cell>
+  <mat-cell *matCellDef="let row" style="padding-left: 0px">{{ row.price }}</mat-cell>
+  </ng-container>
+  <!-- <ng-container matColumnDef="invoiceDetailDelete">
+  <mat-header-cell *matHeaderCellDef style="padding-right: 0px">Delete</mat-header-cell>
+  <mat-cell mat-cell *matCellDef="let element;let i = index" style="margin-right: 0px; padding-right: 0px">
+  <button mat-icon-button type="button" (click)="onDeleteInvoice(i)">
+  <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">
+  delete
+  </mat-icon>
+  </button>
+  </mat-cell>
+  </ng-container> -->
+  <mat-header-row *matHeaderRowDef="invoiceDetailDisplayedColumns; sticky: true"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: invoiceDetailDisplayedColumns; ">
+  </mat-row>
+  </mat-table>
+  </section>
+  </form>
+</div>
+
+
+<div mat-dialog-actions class="cta">
+  <button *ngIf="pModel.entryMode=='V'" mat-raised-button (click)="onPayment(pModel.sdDispatchPlanInvoiceId)" type="button" color="primary">Register Payment</button>
+  <button *ngIf="pModel.entryMode=='V'" mat-raised-button (click)="onReport(pModel.sdDispatchPlanInvoiceId)" type="button" color="primary">Report</button>
+</div>

@@ -1,0 +1,20 @@
+<div class="header">
+  <h1 mat-dialog-title>{{dialog_title}} Brand</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form #sdcarmakeForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Brand</mat-label>
+      <input matInput name="carMake" type="text" [(ngModel)]="pModel.carMake" [readonly]="pModel.readOnly" required>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions class="cta">
+  <div></div>
+  <button *ngIf="pModel.entryMode=='D'" mat-raised-button [disabled]="sdcarmakeForm.invalid" type="submit"
+    (click)="onSubmit(sdcarmakeForm.value)" color="warn">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button [disabled]="sdcarmakeForm.invalid"
+    (click)="onSubmit(sdcarmakeForm.value)" type="button" color="accent">Submit</button>
+</div>

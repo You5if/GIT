@@ -1,0 +1,60 @@
+<form #pageSortForm="ngForm" (ngSubmit)="onSubmit(pageSortForm.value)" fxLayoutAlign.lg="center">
+  <mat-card class="cardForm" style="height: 400px;">
+    <mat-card-title>Sort
+      <section fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs fxLayoutGap="10px">
+        <button mat-icon-button color="primary" type="button" (click)="addRecords(true)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </section>
+    </mat-card-title>
+    <mat-card-content fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="10px">
+      <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px" class="sort-container">
+        <mat-table [dataSource]="pageSortDataSource" class="mat-elevation-z8">
+          <!-- Sr. No.-->
+          <ng-container matColumnDef="sortOrderNo">
+            <mat-header-cell *matHeaderCellDef>Sr. No.</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.sortOrderNo }}</mat-cell>
+          </ng-container>
+          <!-- Column -->
+          <ng-container matColumnDef="columnId">
+            <mat-header-cell *matHeaderCellDef style="min-width: 200px;">Column</mat-header-cell>
+            <mat-cell *matCellDef="let row" style="min-width: 180px;">
+              <mat-select required name="columnId" [(value)]="row.columnId">
+                <mat-option *ngFor="let column of pColumns" [value]="column.id">
+                    {{column.name}}
+                </mat-option>
+              </mat-select>
+            </mat-cell>
+          </ng-container>
+          <!-- direction -->
+          <ng-container matColumnDef="direction">
+            <mat-header-cell *matHeaderCellDef style="min-width: 150px;">Direction</mat-header-cell>
+            <mat-cell *matCellDef="let row" style="min-width: 130px;">
+              <mat-select required name="directionId"
+                [(value)]="row.directionId">
+                <mat-option *ngFor="let direction of pDirections" [value]="direction.id">
+                  {{direction.name}}
+                </mat-option>
+              </mat-select>
+            </mat-cell>
+          </ng-container>
+          <!-- delete Column -->
+          <ng-container matColumnDef="delete">
+            <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+            <mat-cell *matCellDef="let row; let i = index;"><button mat-icon-button color="primary" type="button" (click)="onDelete(i)"
+              style="min-width: 100px;">
+                <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">delete</mat-icon>
+              </button>
+            </mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displaySortColumns; sticky: true"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displaySortColumns;"></mat-row>
+        </mat-table>
+      </section>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center center">
+      <button mat-raised-button color="success" [disabled]="pageSortForm.invalid" type="submit">Submit</button>
+      <button mat-raised-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

@@ -1,0 +1,47 @@
+div {
+    padding: 0
+}
+
+div button {
+    margin-top: 1em;
+}
+
+.wrapper {
+    margin-right: 1em;
+}
+
+mat-expansion-panel {
+    width: 100%;
+}
+
+mat-accordion {
+  width: 100%;
+}
+
+h3 {
+    color: rgba(128, 128, 128, 0.7);
+    padding: 1em 0 1em 1em;
+}
+
+mat-divider {
+    margin: 0em 2em;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

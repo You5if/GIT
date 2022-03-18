@@ -1,0 +1,14 @@
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <input type="text" placeholder="Pick one" aria-label="string" matInput 
+      [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" autoActiveFirstOption role="combobox" aria-activedescendant aria-owns>
+      <mat-option *ngFor="let option of filteredOptions" [value]="option.id">
+        {{option.id}} - 
+        {{option.name}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+
+  <button (click)="click1()">Click</button>
+</form>

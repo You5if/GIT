@@ -1,0 +1,23 @@
+.mat-icon-logo {
+    width: 70px;
+    height: 70px;
+  }
+
+.mat-toolbar-row {
+    background-color:white;
+    max-height: 50px;
+    font-size: small;
+    color: black;
+}
+.mat-toolbar-multiple-rows {
+  min-height: 45px;
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  height: 40px;
+}
+
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
+  height: 100%;
+}
+
+

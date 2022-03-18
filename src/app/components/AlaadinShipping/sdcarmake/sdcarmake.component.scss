@@ -1,0 +1,35 @@
+mat-toolbar {
+    display: flex;
+    justify-content: space-between;
+    position: sticky;
+    position: -webkit-sticky; /* For macOS/iOS Safari */
+    top: 0; /* Sets the sticky toolbar to be on top */
+    z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
+}
+
+mat-icon:hover {
+    cursor: pointer;
+}
+
+mat-card {
+    display: flex;
+    justify-content: space-between;
+    margin: 1em;
+    transition: 0.3s;
+    box-shadow: 1px 1px 5px grey;
+}
+  
+mat-card:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 10px grey;
+}
+
+mat-card-header {
+    width: 85%;
+}
+
+.options {
+    position: absolute;
+    top: 1em;
+    right: 0.5em;
+}

@@ -1,0 +1,51 @@
+::ng-deep.custom-dialog > .mat-dialog-container {
+  background: white;
+}
+.headerRow {
+  top: 0px;
+  position: sticky;
+  z-index: 1;
+}
+
+.index_row {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+}
+
+.fontY {
+  font-size: 35px !important;
+
+  font-weight: lighter;
+}
+
+.Btn {
+  outline: none;
+  border: none;
+}
+
+.add_btn {
+  background: #20bf6b;
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.indexContent {
+  margin-left: 10px;
+}
+.cards_section {
+  background-color: lightgrey;
+  margin-top: 20px;
+}
+.toolbar {
+  background: white;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  width: 100%;
+}

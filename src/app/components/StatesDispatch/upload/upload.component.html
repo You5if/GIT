@@ -1,0 +1,16 @@
+<form #f>
+  <mat-card class="cardMain" style="height: 400px; width: 650px; overflow-y: auto;">
+    <mat-card-title>
+      Files Upload
+    </mat-card-title>
+    <mat-card-content>
+      <app-upload [myFiles]="lFiles" (onUploadFinished)="uploadFinished($event)" (onDeleteFile)="deleteFile($event)">
+      </app-upload>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button type="button" *ngIf="role !== '4'" (click)="onFinalSubmitFile()" class="btn btn-primary"
+        color="primary">Submit</button>
+      <button mat-raised-button type="button" (click)="onCancel()" class="btn btn-primary" color="warn">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

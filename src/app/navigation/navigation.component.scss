@@ -1,0 +1,38 @@
+.sidenav-container {
+    height: 100%;
+  }
+  
+  .sidenav {
+    width: 200px;
+    // background: linear-gradient(180deg, #0078DF 0%, #000000 100%);
+  }
+  
+  .sidenav .mat-toolbar {
+    background: inherit;
+  }
+  
+  .mat-toolbar.mat-primary {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  .navDesk {
+    margin-right: 2em;
+  }
+  
+  .navDesk span {
+    padding: 1em;
+  }
+  
+  .navDesk a {
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    margin: 1em;
+  }
+  

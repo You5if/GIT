@@ -1,0 +1,138 @@
+<mat-toolbar>
+
+  <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
+
+    <section class="fontY">
+      {{header}}
+    </section>
+
+    <section class="sec"  >
+
+      <button *ngIf="role === '2'" class="add_btn" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon>add</mat-icon></button>
+      <!-- <button mat-button color="primary" (click)="openEntry()">Filter</button> -->
+      <!-- <button mat-button color="primary" (click)="onSort()">Sort</button> -->
+      <!-- <button mat-button color="primary" (click)="openEntry()" [disabled]="!screenRights.printFlag">Print</button> -->
+      <!-- <button mat-button color="primary" (click)="refreshMe()">Refresh</button> -->
+
+      <!-- <mat-form-field [ngStyle]="{'float':'right', 'margin-right':'60px'}">
+
+        <input matInput (keyup)="applyFilter($event.target.value)">
+
+        <mat-placeholder>
+
+          <mat-icon>search</mat-icon>
+
+        </mat-placeholder>
+
+      </mat-form-field> -->
+
+    </section>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- <Section [ngClass]="['custom-table-container']"> -->
+<Section [dir]="direction" fxHide.xs class="toolSection" mat-elevation-z8>
+
+  <mat-table  #table [dataSource]="dataSource"  style="width: 100%">
+
+    <!-- Columns definition here to be displayed -->
+
+    <ng-container matColumnDef="select">
+      <mat-header-cell class="cbPad"  *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+</mat-checkbox>
+      </mat-header-cell>
+       <mat-cell class="cbPad" *matCellDef="let row; let i = index">
+        <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null; onId(i,row)"
+                    [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+
+      </mat-cell>
+
+  </ng-container>
+
+    <ng-container matColumnDef="workspaceId">      <mat-header-cell class="centH" *matHeaderCellDef>{{workspaceId}}</mat-header-cell>     <mat-cell class="cent" mat-cell *matCellDef="let row">{{row.workspacename}}</mat-cell>
+    </ng-container>
+
+   
+
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell class="cent" *matHeaderCellDef>{{edit}}</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <button class="Btn" mat-icon-button color="primary" (click)="onEdit(row.workspaceId)" [disabled]="!screenRights.editFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button class="Btn" mat-icon-button color="primary"
+          (click)="onDelete(row.workspaceId)" [disabled]="!screenRights.deleteFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- view Column -->
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button class="Btn" mat-icon-button color="primary" (click)="onView(row.workspaceId)"
+          [disabled]="!screenRights.viewFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="primary">visibility
+          </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="headerRow" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onBoard(row.workspaceId)" class="rowR" [class.active]="clickedRows.has(row)" ></mat-row>
+
+  </mat-table>
+
+</Section>
+
+<section [dir]="direction" class="cards_section" fxHide fxShow.xs>
+  <div *ngFor="let index of indexes">
+    <mat-card fxLayout class="card">
+      <div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{workspaceId}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.workspaceId }}</h3>
+        </div>
+        
+        
+      </div>
+      <div>
+        <button class="Btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onEdit(index.workspaceId)" class="Btn" mat-menu-item>{{edit}}</button>
+  
+</mat-menu>
+      </div>
+    </mat-card>
+
+  </div>
+</section>
+
+<div class="paginator">
+
+  <mat-paginator  [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+    (page)="paginatoryOperation($event)" showFirstLastButtons>
+  </mat-paginator>
+</div>
+
+<!-- <button (click)="onId()">
+  id
+</button> -->
+

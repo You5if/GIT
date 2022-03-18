@@ -1,0 +1,24 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Color
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+        <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList aria-label="Color selection">
+                <mat-chip *ngFor="let color of colors" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(color)">
+                {{color.name}}
+                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+                </mat-chip>
+                <input placeholder="Color"
+                        [matChipInputFor]="chipList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        [matChipInputAddOnBlur]="addOnBlur"
+                        (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+        </mat-form-field>
+    </ng-template>
+</mat-expansion-panel>
+

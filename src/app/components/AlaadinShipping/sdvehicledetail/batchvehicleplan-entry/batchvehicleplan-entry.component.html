@@ -1,0 +1,24 @@
+<div class="header">
+  <h1 mat-dialog-title>Add Vehicles to Plan</h1>
+  <button mat-mini-fab type="button" (click)="onCancel()" color="warn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div mat-dialog-content class="wrapper">
+  <form #sdvehicledetailForm="ngForm">
+    <mat-form-field>
+    <input [formControl]="planAC" type="text" placeholder="Plan" maxlength="100" matInput [matAutocomplete]="planACC">    
+    <mat-autocomplete #planACC="matAutocomplete">
+      <mat-option *ngFor="let selectModel of filteredPlans | async; let index = index" [value]="selectModel.id" (onSelectionChange)="onPlanSelect(selectModel.id)"> 
+        {{selectModel.name}}
+      </mat-option>
+    </mat-autocomplete>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="cta">
+  <button mat-raised-button [disabled]="sdvehicledetailForm.invalid" (click)="onSubmit(sdvehicledetailForm.value)" type="button" color="accent">Submit</button>
+  <button mat-raised-button [disabled]="sdvehicledetailForm.invalid" type="submit" color="warn">Delete</button>
+</div>

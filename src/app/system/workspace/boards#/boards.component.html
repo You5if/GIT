@@ -1,0 +1,63 @@
+<!-- <div class="head">
+  <i class="far fa-user"></i>
+  <h2 class="headText">Your Workspace boards</h2>
+</div>
+<div class="mainRow">
+  <div *ngFor="let board of boards">
+    <div class="board" (click)="onBoard(board.boardId)">
+      <h4 class="boardName">{{board.boardName}}</h4>
+    </div>
+  </div>
+</div> -->
+<!-- <section class="section" [dir]="direction">
+  <div class="bigMain" fxLayout>
+    <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+  </div>
+
+<div>
+  <h3>{{hello}}</h3>
+</div>
+  
+</section> -->
+
+
+<section class="section" [dir]="direction">
+  <div class="bigMain" fxLayout>
+    <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+  </div>
+
+  <div class="head">
+    <i class="far fa-user"></i>
+    <h2 class="headText">{{name}} workspace</h2>
+  </div>
+  <section class="section" [dir]="direction">
+      <div class="container">
+        <mat-grid-list
+          [cols]="breakpoint"
+          rowHeight="105px"
+          (window:resize)="onResize($event)"
+  
+        >
+          <div  *ngFor="let board of boards">
+            
+              <mat-grid-tile>
+                <div class="board" (click)="onBoard(board.boardId)">
+                  <h4 class="boardName">{{board.boardName}}</h4>
+                </div>
+              </mat-grid-tile>
+              
+  
+          
+          </div>
+        </mat-grid-list>
+      </div>
+  </section>
+  
+</section>
+
+
+
+
+                      <!-- Fields come here -->
+
+

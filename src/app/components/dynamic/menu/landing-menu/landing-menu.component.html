@@ -1,0 +1,39 @@
+<div *ngIf="!isLoggedIn()">
+  <mat-toolbar color="primary">
+    <div fxShow="true" fxHide.gt-sm="true">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+    </div>
+
+    <button mat-button routerLink="/">
+                <mat-icon class="mat-icon-logo" svgIcon="logo"></mat-icon>
+    </button>
+    <span class="example-spacer"></span>
+    <div fxShow="true" fxHide.lt-md="true">
+      <ul fxLayout fxLayoutGap="10px" class="navigation-items">
+        <li>
+            <button mat-button [routerLink]="['/']" routerLinkActive="router-link-active">Home</button>
+        </li>
+        <li>
+            <button mat-button [routerLink]="['/login']" routerLinkActive="router-link-active">Sign In</button>
+        </li>
+    </ul>
+    </div>
+
+  </mat-toolbar>
+  <mat-sidenav-container  class="example-container">
+
+    <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+      <div fxLayout="column">
+        <a mat-button routerLink="/">Home</a>
+		    <a mat-button routerLink="/login">Sign In</a>
+      </div>
+    </mat-sidenav>
+     <mat-sidenav-content fxFlexFill>
+      <main>
+        <router-outlet></router-outlet>
+      </main>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

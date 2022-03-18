@@ -1,0 +1,14 @@
+<app-uploadread-files #uploadfileslcomp [result]="myFiles" (onFileDeleteFromList)="onFileDeleteFromList($event)"></app-uploadread-files>
+
+<input type="file" #file placeholder="Choose file" (change)="uploadFile(file.files)" style="display:none;" accept="image/*">
+<section *ngIf="showProgress()">
+<mat-progress-bar mode="determinate" value="progress">
+  <span class="upload">
+    {{progress}}%
+  </span>
+</mat-progress-bar>
+<span class="upload" *ngIf="message">
+  {{message}}
+</span>
+</section>
+ <!-- <button type="button" class="btn btn-success" (click)="file.click()">Upload File</button> -->

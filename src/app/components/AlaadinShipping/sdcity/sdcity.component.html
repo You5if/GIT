@@ -1,0 +1,97 @@
+<mat-toolbar>
+
+  <mat-toolbar-row style="background-color:white;max-height: 50px;">
+
+    <section>
+      Shipping > City
+    </section>
+
+    <section fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs fxLayoutGap="10px">
+
+      <button mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag">Add</button>
+      <!-- <button mat-button color="primary" (click)="openEntry()">Filter</button>
+      <button mat-button color="primary" (click)="onSort()">Sort</button>
+      <button mat-button color="primary" (click)="openEntry()" [disabled]="!screenRights.printFlag">Print</button>
+      <button mat-button color="primary" (click)="refreshMe()">Refresh</button> -->
+
+      <mat-form-field [ngStyle]="{'float':'right', 'margin-right':'60px'}">
+
+        <input matInput (keyup)="applyFilter($event.target.value)">
+
+        <mat-placeholder>
+
+          <mat-icon>search</mat-icon>
+
+        </mat-placeholder>
+
+      </mat-form-field>
+
+    </section>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- <Section [ngClass]="['custom-table-container']"> -->
+<Section class="table-container" mat-elevation-z8>
+
+  <mat-table #table [dataSource]="dataSource" class="mat-elevation-z8" style="width: 100%">
+
+    <!-- Columns definition here to be displayed -->
+
+    <ng-container matColumnDef="City">      <mat-header-cell *matHeaderCellDef>City</mat-header-cell>     <mat-cell mat-cell *matCellDef="let row">{{row.city}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="SDStateId">      <mat-header-cell *matHeaderCellDef>SDStateId</mat-header-cell>     <mat-cell mat-cell *matCellDef="let row">{{row.sdStateId}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="PostalCode">      <mat-header-cell *matHeaderCellDef>PostalCode</mat-header-cell>     <mat-cell mat-cell *matCellDef="let row">{{row.postalCode}}</mat-cell>
+    </ng-container>
+
+
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>Edit</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row">
+        <button mat-icon-button color="primary" (click)="onEdit(row.sdCityId)" [disabled]="!screenRights.editFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true">edit</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button mat-icon-button color="primary"
+          (click)="onDelete(row.sdCityId)" [disabled]="!screenRights.deleteFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- view Column -->
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button mat-icon-button color="primary" (click)="onView(row.sdCityId)"
+          [disabled]="!screenRights.viewFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="primary">visibility
+          </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (click)="row.highlighted = !row.highlighted"
+      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+  </mat-table>
+
+</Section>
+
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>
+

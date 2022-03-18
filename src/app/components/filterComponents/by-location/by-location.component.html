@@ -1,0 +1,20 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Location
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+        <form [formGroup]="locationFilter">
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <mat-select multiple formControlName="location"  (selectionChange)="onLocationChange()">
+                    <mat-option value="Newark">Newark</mat-option>
+                    <mat-option value="Savannah">Savannah</mat-option>
+                    <mat-option value="Houston">Houston</mat-option>
+                    <mat-option value="Long Beach">Long Beach</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </form>
+    </ng-template>
+</mat-expansion-panel>

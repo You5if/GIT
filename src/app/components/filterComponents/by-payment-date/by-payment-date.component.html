@@ -1,0 +1,24 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Payment Date
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form [formGroup]="myForm">
+      <mat-form-field>
+          <mat-label>From</mat-label>
+          <input matInput [matDatepicker]="paymentDatePickerFrom" formControlName="from">
+          <mat-datepicker-toggle matSuffix [for]="paymentDatePickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #paymentDatePickerFrom></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>To</mat-label>
+          <input matInput [matDatepicker]="paymentDatePickerTo" formControlName="to">
+          <mat-datepicker-toggle matSuffix [for]="paymentDatePickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #paymentDatePickerTo></mat-datepicker>
+      </mat-form-field>
+  `</form>
+  </ng-template>
+</mat-expansion-panel>

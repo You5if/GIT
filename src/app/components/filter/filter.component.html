@@ -1,0 +1,54 @@
+<h1 style="padding: 1em; font-weight: bold;" mat-dialog-title>Filters</h1>
+<div mat-dialog-actions style="padding: 1em;">
+  <button mat-flat-button color="accent" type="button" (click)="onSubmit()" (click)="$event.stopPropagation()" style="margin-right: 2em;">Filter</button>
+  <button mat-flat-button color="warn" type="button" (click)="onClearFilters()" (click)="$event.stopPropagation()">Clear</button>
+</div>
+<div class="wrapper" mat-dialog-content>
+    <mat-accordion>
+        <h3>Vehicles</h3>
+        <by-vin></by-vin>
+        <by-company *ngIf="role !== '4'"></by-company>
+        <by-year></by-year>
+        <by-brand></by-brand>
+        <by-model></by-model>
+        <by-vehicle-type></by-vehicle-type>
+        <by-color></by-color>
+        <by-location></by-location>
+        <by-lot-no></by-lot-no>
+        <by-license-plate></by-license-plate>
+        <by-tag-no></by-tag-no>
+        <by-vehicle-dispatch-status></by-vehicle-dispatch-status>
+        <h3>Plans</h3>
+        <by-plan-code></by-plan-code>
+        <by-customer-name></by-customer-name>
+        <by-shipping-company></by-shipping-company>
+        <by-booking-no></by-booking-no>
+        <by-container-no></by-container-no>
+        <by-loading-plan-no></by-loading-plan-no>
+        <by-consignee></by-consignee>
+        <!-- <by-plan-dispatch-date></by-plan-dispatch-date> -->
+        <by-plan-status></by-plan-status>
+        <h3>Expenses</h3>
+        <by-vehicle-expense-date></by-vehicle-expense-date>
+        <by-vehicle-billable-item></by-vehicle-billable-item>
+        <by-vehicle-supplier *ngIf="role !== '4'"></by-vehicle-supplier>
+        <by-vehicle-ref-no *ngIf="role !== '4'"></by-vehicle-ref-no>
+        <by-vehicle-cost-price *ngIf="role !== '4'"></by-vehicle-cost-price>
+        <by-vehicle-selling-price></by-vehicle-selling-price>
+        <mat-divider></mat-divider>
+        <by-plan-expense-date></by-plan-expense-date>
+        <by-plan-billable-item></by-plan-billable-item>
+        <by-plan-supplier *ngIf="role !== '4'"></by-plan-supplier>
+        <by-plan-ref-no *ngIf="role !== '4'"></by-plan-ref-no>
+        <by-plan-cost-price *ngIf="role !== '4'"></by-plan-cost-price>
+        <by-plan-selling-price></by-plan-selling-price>
+        <mat-divider></mat-divider>
+        <by-invoice-no></by-invoice-no>
+        <by-invoice-total-amount></by-invoice-total-amount>
+        <h3>Payment</h3>
+        <by-payment-date></by-payment-date>
+        <by-payment-type></by-payment-type>
+        <by-payment-ref-type></by-payment-ref-type>
+        <by-payment-amount></by-payment-amount>
+    </mat-accordion>
+</div>

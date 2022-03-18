@@ -1,0 +1,23 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Company
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form [formGroup]="companyFilter">
+      <mat-form-field>
+          <mat-label>Company</mat-label>
+          <!-- <mat-select multiple formControlName="company"  (selectionChange)="onCompanyChange()"> -->
+            <mat-select multiple formControlName="company"
+            (selectionChange)="onCompanyChange()">
+            <mat-option *ngFor="let item of companies" [value]="item.name">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+          <!-- </mat-select> -->
+      </mat-form-field>
+    </form>
+  </ng-template>
+</mat-expansion-panel>
+

@@ -1,0 +1,199 @@
+// ::ng-deep.mat-checkbox-checked.mat-accent.mat-checkbox-ripple.mat-ripple-element {
+//   opacity: 0.03 !important;
+//   background-color: #911600 !important;
+// }
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: gray;
+}
+
+.section {
+  width: 700px;
+}
+
+.cancel_Img {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+
+.Main {
+  width: 100%;
+
+  height: 100%;
+}
+.bigMain {
+  width: 100%;
+  padding: 0 0 0 30px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+.fontY {
+  font-size: 30px !important;
+
+  font-weight: lighter;
+  margin-bottom: 20px;
+  margin-top: 10px;
+}
+
+.BtnS {
+  outline: none;
+  border: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100px;
+  color: white;
+  background: #20bf6b;
+}
+.BtnC {
+  outline: none;
+  border: none;
+  width: 100px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background: #e9e9e9;
+  color: black;
+}
+
+.input_class {
+  width: 200px;
+  height: 50px;
+
+  background-color: #e9e9e9;
+  border: none;
+  border-radius: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-bottom: none !important;
+  outline: none !important;
+  text-decoration-line: none;
+}
+.input {
+  outline: none;
+  text-decoration: none;
+}
+
+.in {
+  padding: 20px;
+}
+
+.NoAccess {
+  width: 0;
+  height: 0;
+}
+.mat-dialog-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+.cardForm {
+  margin: 10px;
+  width: 100%;
+}
+.cardForm .mat-form-field {
+  padding: 5px;
+}
+
+.space {
+  width: 200px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 20px;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  margin-top: 12px;
+
+  justify-content: flex-end;
+}
+.radio {
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 100;
+}
+mat-radio-button {
+  margin-left: 15px;
+  margin-top: 10px;
+}
+label {
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 100;
+}
+.textArea {
+  height: 35px;
+}
+@media (max-width: 960px) {
+  .section {
+    width: 300px;
+  }
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-right: 0px;
+  }
+  .bigMain {
+    width: 100%;
+    padding: 0 0 0 20px;
+    height: 100%;
+  }
+  .Main {
+    width: 100%;
+    padding: 0;
+    height: 350px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .Main::-webkit-scrollbar {
+    width: 3px;
+  }
+  .Main::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+
+    background-color: #e9e9e9;
+  }
+}
+@media (max-width: 435px) {
+  .section {
+    width: 240px;
+  }
+  .btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .bigMain {
+    width: 100%;
+    padding: 0 0 0 20px;
+    height: 100%;
+  }
+  .Main {
+    width: 100%;
+    padding: 0;
+    height: 350px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .Main::-webkit-scrollbar {
+    width: 3px;
+  }
+  .Main::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+
+    background-color: #e9e9e9;
+  }
+}
+
+// @media (max-width: 960px) {
+//   .Main {
+//     width: 300px;
+//   }
+// }
+// @media (max-width: 420px) {
+//   .Main {
+//     width: 250px;
+//   }
+// }

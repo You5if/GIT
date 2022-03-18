@@ -1,0 +1,41 @@
+<h1 mat-dialog-title>Master Report</h1>
+<div mat-dialog-content>
+  <form [formGroup]="myForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <mat-select formControlName="company" [disabled]="role === '4'">
+        <mat-option *ngFor="let company of companyies" [value]="company.id">
+          {{company.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline">
+      <input type="text" placeholder="Company" aria-label="Number" matInput formControlName="company"
+        [matAutocomplete]="auto">
+      <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+        <mat-option *ngFor="let company of companyies" [value]="company.id">
+          {{ company.name }}
+        </mat-option>
+      </mat-autocomplete>
+    </mat-form-field> -->
+
+    <mat-form-field appearance="outline">
+      <mat-label>Starting Date</mat-label>
+      <input matInput [matDatepicker]="from" formControlName="fromDate">
+      <mat-datepicker-toggle matSuffix [for]="from"></mat-datepicker-toggle>
+      <mat-datepicker #from></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input matInput [matDatepicker]="to" formControlName="toDate">
+      <mat-datepicker-toggle matSuffix [for]="to"></mat-datepicker-toggle>
+      <mat-datepicker #to></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-flat-button color="warn" (click)="onClose()">Cancel</button>
+  <button mat-flat-button color="accent" (click)="onSubmit()">Submit</button>
+</div>

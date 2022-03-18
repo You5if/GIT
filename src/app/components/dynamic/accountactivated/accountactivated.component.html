@@ -1,0 +1,19 @@
+<ng-template #notActivated>
+    <div>
+        <p>Account has been Activated</p>
+        <mat-icon>check_circle</mat-icon>
+    </div>
+  </ng-template>
+  
+  <ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+    <ng-container *ngTemplateOutlet="notActivated">
+    </ng-container>
+  </ng-template> 
+  
+  <ng-template #bigScreen>
+    <mat-card>
+      <ng-container *ngTemplateOutlet="notActivated">
+      </ng-container>  
+    </mat-card>
+  </ng-template> 
+  

@@ -1,0 +1,26 @@
+mat-form-field {
+    width: 100%;
+}
+
+mat-divider {
+    margin: 1.8em 0;
+}
+
+.cta {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media(min-width: 1024px) {
+    mat-divider {
+        display: none;
+    }
+
+    mat-form-field {
+        padding: 0 1em;
+    }
+
+    .md-top, .md-bottom, .md-mid-1, .md-mid-2 {
+        width: 95.5%;
+    }
+}

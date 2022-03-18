@@ -1,0 +1,40 @@
+<form #countryForm="ngForm" (ngSubmit)="onSubmit(countryForm.value)" fxLayoutAlign.lg="center">
+  <mat-card class="cardForm">
+    <mat-card-title>{{dialog_title}}</mat-card-title>
+    <mat-card-content fxLayout="row" fxLayout.xs="column" fxLayoutWrap fxLayoutGap="10px">
+      <section fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+        <mat-form-field>
+          <input matInput name="CountryCode" placeholder="Code" type="text" required maxlength="10" #codeInput="ngModel"
+            [(ngModel)]="pModel.countryCode" [readonly]="pModel.readOnly">
+          <mat-error *ngIf="codeInput.hasError('required')">Code cannot be blank!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="Country" placeholder="Country" type="text" required maxlength="100" #countryInput="ngModel"
+            [(ngModel)]="pModel.country" [readonly]="pModel.readOnly">
+          <mat-error *ngIf="countryInput.hasError('required')">Country cannot be blank!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="ISOAlpha2Code" placeholder="ISO Alpha 2" type="text" required maxlength="2"
+            #ISOAlpha2CodeInput="ngModel" [(ngModel)]="pModel.isoAlpha2Code" [readonly]="pModel.readOnly">
+          <mat-error *ngIf="ISOAlpha2CodeInput.hasError('required')">ISO Alpha 2 cannot be blank!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="ISOAlpha3Code" placeholder="ISO Alpha 3" type="text" required maxlength="3"
+            #ISOAlpha3CodeInput="ngModel" [(ngModel)]="pModel.isoAlpha3Code" [readonly]="pModel.readOnly">
+          <mat-error *ngIf="ISOAlpha3CodeInput.hasError('required')">ISO Alpha 3 cannot be blank!</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput name="ISONumericCode" placeholder="ISO Numeric" type="text" required maxlength="5"
+            #ISONumericCodeInput="ngModel" [(ngModel)]="pModel.isoNumericCode" [readonly]="pModel.readOnly">
+          <mat-error *ngIf="ISONumericCodeInput.hasError('required')">ISO Numeric cannot be blank!</mat-error>
+        </mat-form-field>
+        <mat-checkbox name="active" [(ngModel)]="pModel.active" [disabled]="pModel.readOnly">Active</mat-checkbox>
+      </section>
+    </mat-card-content>
+    <mat-card-actions fxLayoutAlign="center center">
+        <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button color="success" [disabled]="countryForm.invalid" type="submit">Submit</button>
+        <button *ngIf="pModel.entryMode=='D'" mat-raised-button color="warn" [disabled]="countryForm.invalid" type="submit">Delete</button>
+        <button mat-raised-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

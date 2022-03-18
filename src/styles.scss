@@ -1,0 +1,102 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$AladdinShipping-primary: mat-palette($mat-indigo);
+$AladdinShipping-accent: mat-palette($mat-blue, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$AladdinShipping-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$AladdinShipping-theme: mat-light-theme(
+  $AladdinShipping-primary,
+  $AladdinShipping-accent,
+  $AladdinShipping-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($AladdinShipping-theme);
+
+// Dark Theme controls here.....
+$AladdinShipping-Dark-primary: mat-palette($mat-indigo);
+$AladdinShipping-Dark-accent: mat-palette($mat-blue, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$AladdinShipping-Dark-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$AladdinShipping-Dark-theme: mat-dark-theme(
+  $AladdinShipping-Dark-primary,
+  $AladdinShipping-Dark-accent,
+  $AladdinShipping-Dark-warn
+);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+.DarkTheme {
+  @include angular-material-theme($AladdinShipping-Dark-theme);
+}
+
+/* You can add global styles to this file, and also import other style files */
+
+// @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap");
+
+@import "../node_modules/alertifyjs/build/css/alertify.min.css";
+@import "../node_modules/alertifyjs/build/css/themes/bootstrap.min.css";
+
+* {
+  // font-family: 'Roboto', sans-serif !important;
+  font-size: 16px !important;
+  font-family: "Open Sans", sans-serif;
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+  left: 0;
+  -webkit-overflow-scrolling: touch;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+mat-icon {
+  font-size: 1.4em !important;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// main {background-color: #eee; padding: 1em;}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.header mat-icon:hover {
+  cursor: pointer;
+}
+
+.sleep {
+  background-color: grey;
+  color: white;
+}

@@ -1,0 +1,51 @@
+<h1 mat-dialog-title>{{dialog_title}}</h1>
+
+<div mat-dialog-content class="wrapper">
+  <form #sddispatchplanpaymentForm="ngForm">
+    <div class="md-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Date</mat-label>
+        <input matInput name="paymentDate" [matDatepicker]="paymentDate" [(ngModel)]="pModel.paymentDate"
+          [readonly]="pModel.readOnly" required>
+        <mat-datepicker-toggle matSuffix [for]="paymentDate"></mat-datepicker-toggle>
+        <mat-datepicker #paymentDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Type</mat-label>
+        <mat-select matNativeControl name="paymentTypeId" [(ngModel)]="pModel.paymentTypeId"
+          [disabled]="pModel.readOnly">
+          <mat-option *ngFor="let item of paymentTypes" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Amount</mat-label>
+        <input matInput name="paymentAmount" type="number" [(ngModel)]="pModel.paymentAmount"
+          [readonly]="pModel.readOnly" required>
+      </mat-form-field>
+    </div>
+
+    <div class="md-2">
+      <mat-form-field appearance="outline">
+        <input matInput name="reference" placeholder="Reference" type="text" [(ngModel)]="pModel.reference"
+          [readonly]="pModel.readOnly" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <input matInput name="memo" placeholder="Memo" type="text" [(ngModel)]="pModel.memo"
+          [readonly]="pModel.readOnly" required>
+      </mat-form-field>
+    </div>
+  </form>
+</div>
+
+<div mat-dialog-actions class="cta">
+  <button mat-flat-button type="button" class="sleep" (click)="onCancel()">Cancel</button>
+  <button *ngIf="pModel.entryMode=='D'" mat-flat-button color="warn" [disabled]="sddispatchplanpaymentForm.invalid"
+    (click)="onSubmit(sddispatchplanpaymentForm.value)" type="submit">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-flat-button color="accent"
+    [disabled]="sddispatchplanpaymentForm.invalid" (click)="onSubmit(sddispatchplanpaymentForm.value)">Submit</button>
+</div>

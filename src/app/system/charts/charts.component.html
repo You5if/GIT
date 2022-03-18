@@ -1,0 +1,106 @@
+<div class="row">
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [datasets]="lineChart.ChartData"
+              [labels]="lineChart.ChartLabels"
+              [options]="lineChart.ChartOptions"
+              [colors]="lineChart.ChartColors"
+              [legend]="lineChart.ChartLegend"
+              [chartType]="lineChart.ChartType" ></canvas>
+    </div>
+  </div>
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [data]="pieChart.ChartData"
+              [labels]="pieChart.ChartLabels"
+              [colors]="pieChart.ChartColors"
+              [chartType]="pieChart.ChartType" ></canvas>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [datasets]="horizantalBarChart.ChartData"
+              [labels]="horizantalBarChart.ChartLabels"
+              [options]="horizantalBarChart.ChartOptions"
+              [colors]="horizantalBarChart.ChartColors"
+              [legend]="horizantalBarChart.ChartLegend"
+              [chartType]="horizantalBarChart.ChartType" ></canvas>
+    </div>
+   
+      <h4>Basic mat-select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Select date</mat-label>
+    <mat-select 
+    
+    (selectionChange)="onDateChange($event.value)"
+    >
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+    
+  </div>
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [datasets]="barChart.ChartData"
+              [labels]="barChart.ChartLabels"
+              [options]="barChart.ChartOptions"
+              [colors]="barChart.ChartColors"
+              [legend]="barChart.ChartLegend"
+              [chartType]="barChart.ChartType" ></canvas>
+    </div>
+    <h4>Basic mat-select</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>Select date</mat-label>
+    <mat-select 
+    
+    (selectionChange)="onChangeDays($event.value)"
+    >
+      <mat-option *ngFor="let food of Days" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  </div>
+</div>
+<div class="row">
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [data]=" DoughnutChart.ChartData"
+              [labels]=" DoughnutChart.ChartLabels"
+              
+              [chartType]=" DoughnutChart.ChartType" ></canvas>
+    </div>
+  </div>
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [datasets]="radarChart.ChartData"
+              [labels]="radarChart.ChartLabels"
+              
+              [chartType]="radarChart.ChartType" ></canvas>
+    </div>
+  </div>
+  
+</div>
+<div class="row">
+  <div class="bar">
+    <div style="display: block;">
+      <canvas baseChart
+              [data]="polarChart.ChartData"
+              [labels]="polarChart.ChartLabels"
+              [colors]="polarChart.ChartColors"
+              [chartType]="polarChart.ChartType" ></canvas>
+    </div>
+  </div>
+  
+  
+</div>

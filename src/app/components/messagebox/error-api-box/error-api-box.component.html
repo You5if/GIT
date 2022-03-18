@@ -1,0 +1,42 @@
+<mat-card>
+  <mat-card-title>
+      Service Error
+  </mat-card-title>
+  <mat-card-content>
+      <table>
+          <tr><td>#</td><td><mat-label>{{data.id}}</mat-label></td></tr>
+          <tr><td>Error No.</td><td><mat-label>{{data.errorNo}}</mat-label></td></tr>
+          <tr><td>Message</td><td><mat-label>{{data.errorMessage}}</mat-label></td></tr>
+          <tr><td>Document No.</td><td><mat-label>Document No. {{data.documentNo}}</mat-label></td></tr>
+          <tr><td>Object Error No.</td><td><mat-label>{{data.sQLErrorNumber}}</mat-label></td></tr>
+          <tr><td>Priority</td><td><mat-label>{{data.sQLErrorSeverity}}</mat-label></td></tr>
+          <tr><td>State</td><td><mat-label>{{data.sQLErrorState}}</mat-label></td></tr>
+          <tr><td>Object</td><td><mat-label>{{data.sQLObjectName}}</mat-label></td></tr>
+          <tr><td>Line No.</td><td><mat-label>{{data.sQLErrorLineNo}}</mat-label></td></tr>
+          <tr><td>Database Message</td><td><mat-label>{{data.sQLErrorMessage}}</mat-label></td></tr>
+        </table>
+  </mat-card-content>
+  <mat-card-actions class="cen">
+      <button mat-raised-button class="add_btn" (click)="closeDialog()">OK</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<!-- <h2 mat-dialog-title>Service Error</h2>
+<mat-dialog-content>
+  <table>
+    <tr><td>#</td><td><mat-label>{{data.id}}</mat-label></td></tr>
+    <tr><td>Error No.</td><td><mat-label>{{data.errorNo}}</mat-label></td></tr>
+    <tr><td>Message</td><td><mat-label>{{data.errorMessage}}</mat-label></td></tr>
+    <tr><td>Document No.</td><td><mat-label>Document No. {{data.documentNo}}</mat-label></td></tr>
+    <tr><td>Object Error No.</td><td><mat-label>{{data.sQLErrorNumber}}</mat-label></td></tr>
+    <tr><td>Priority</td><td><mat-label>{{data.sQLErrorSeverity}}</mat-label></td></tr>
+    <tr><td>State</td><td><mat-label>{{data.sQLErrorState}}</mat-label></td></tr>
+    <tr><td>Object</td><td><mat-label>{{data.sQLObjectName}}</mat-label></td></tr>
+    <tr><td>Line No.</td><td><mat-label>{{data.sQLErrorLineNo}}</mat-label></td></tr>
+    <tr><td>Database Message</td><td><mat-label>{{data.sQLErrorMessage}}</mat-label></td></tr>
+  </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button (click)="closeDialog()">OK</button>
+</mat-dialog-actions> -->

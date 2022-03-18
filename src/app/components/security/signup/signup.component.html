@@ -1,0 +1,130 @@
+<ng-template #signupForm>
+  <form #f="ngForm" (ngSubmit)="onSubmit()">
+    <!-- Personal Info -->
+    <div *ngIf="!initialCheckup">
+      <h1>Add User Details</h1>
+      <mat-form-field appearance="outline">
+        <mat-label>Fullname</mat-label>
+        <input matInput type="text" required maxlength="100" #profileInput="ngModel" [(ngModel)]="userObject.displayName" name="displayname">
+      <mat-error *ngIf="profileInput.hasError('required')">Profile cannot be blank!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" email required maxlength="255" #emailInput="ngModel" [(ngModel)]="valUserObject.username" name="username">
+        <mat-error *ngIf="emailInput.hasError('required')">Email cannot be blank!</mat-error>
+        <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" required minlength="8" maxlength="50" #passwordInput="ngModel" [(ngModel)]="valUserObject.password" name="password">
+        <mat-error>Should be at least 8 characters long.</mat-error>
+      </mat-form-field>
+
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select matNativeControl name="roleId" [(ngModel)]="valUserObject.roleId">
+          <mat-option *ngFor="let item of roleNames" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field> -->
+    </div>
+
+
+    <!-- Address Info -->
+    <div *ngIf="initialCheckup">
+      <h1>Company Details</h1>
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="countryId" placeholder="Country" [(ngModel)]="countryId" (selectionChange)="onCountryChange()">
+          <mat-option *ngFor="let item of countryList" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="stateId" placeholder="State" [(ngModel)]="stateId" (selectionChange)="onStateChange()">
+          <mat-option *ngFor="let item of statesList" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="sdCityId" placeholder="City" [(ngModel)]="companyObject.sdCityId" (selectionChange)="onCityChange()">
+          <mat-option *ngFor="let item of cityTypes" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+
+    <!-- Business Info -->
+    <div *ngIf="initialCheckup">
+      <mat-form-field appearance="outline">
+        <input matInput placeholder="Company" type="text" required maxlength="100" #companyInput="ngModel" [(ngModel)]="companyObject.company" name="companyname">
+        <mat-error *ngIf="companyInput.hasError('required')">Company cannot be blank!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <textarea matInput placeholder="Address" maxlength="100" required name="address" #addressInput="ngModel" [(ngModel)]="companyObject.address"></textarea>
+        <mat-error *ngIf="addressInput.hasError('required')">Address cannot be blank!</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <textarea matInput placeholder="Other Information" maxlength="100" required name="otherInformation" #otherInformationInput="ngModel" [(ngModel)]="companyObject.otherInformation"></textarea>
+        <mat-error *ngIf="otherInformationInput.hasError('required')">Other Information cannot be blank!</mat-error>
+      </mat-form-field>
+
+      <section>
+        <button mat-raised-button style="margin:10px 8px;" type="button" (click)="addLocationRecord()">
+        +
+        </button>
+        <mat-table style="width: 100%; height: 230px; overflow-y: auto;" [dataSource]="locationDataSource"
+        class="mat-elevation-z8">
+        <ng-container matColumnDef="locationSrNo">
+          <mat-header-cell *matHeaderCellDef style="padding-left: 0px">Sr. No.</mat-header-cell>
+          <mat-cell *matCellDef="let row" style="padding-left: 0px">{{ row.srNo }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="location">
+          <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let row">
+            <mat-form-field>
+              <input matInput name="location" [(ngModel)]="row.location" type="text"
+                [ngModelOptions]="{standalone: true}">
+            </mat-form-field>
+          </mat-cell>
+          </ng-container>
+        <ng-container matColumnDef="locationDelete">
+          <mat-header-cell *matHeaderCellDef style="padding-right: 0px">Delete</mat-header-cell>
+          <mat-cell mat-cell *matCellDef="let element;let i = index" style="margin-right: 0px; padding-right: 0px">
+            <button mat-icon-button type="button" (click)="onDeleteLocation(i)">
+              <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">
+                delete
+              </mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef="locationDisplayedColumns; sticky: true"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: locationDisplayedColumns; ">
+        </mat-row>
+        </mat-table>
+        </section>
+    </div>
+
+    <div class="formNavs">
+      <button mat-button type="button" color="warn" [routerLink]="['/']" routerLinkActive="router-link-active">Cancel</button>
+      <button mat-button color="primary" *ngIf="!initialCheckup" type="button" [disabled]="f.invalid" (click)="onNext()">Next</button>
+      <button mat-button color="primary" *ngIf="initialCheckup" [disabled]="f.invalid" type="submit">Submit</button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+  <ng-container *ngTemplateOutlet="signupForm">
+  </ng-container>
+</ng-template>
+
+<ng-template #bigScreen>
+  <mat-card>
+    <ng-container *ngTemplateOutlet="signupForm">
+    </ng-container>
+  </mat-card>
+</ng-template>

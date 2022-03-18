@@ -1,0 +1,287 @@
+<mat-toolbar>
+  <mat-toolbar-row style="background-color:white;max-height: 50px;">
+    Dashboard
+  </mat-toolbar-row>
+</mat-toolbar>
+<section class="containerThumbs" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-md="20px" fxLayoutAlign="center top"
+  style="padding-left: 10px; padding-right: 10px;">
+  <mat-card class="cardThumbs">
+    <mat-card-title>
+      <section fxLayoutAlign="center center">
+        <button mat-fab color="accent">
+          <mat-icon>shopping_cart</mat-icon>
+        </button>
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">$9851</section>
+      </section>
+    </mat-card-title>
+    <mat-card-content>
+      <section style="padding-top:20px;" fxLayoutAlign="center center">
+        Total Sales: $22458
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-flat-button>
+            <mat-icon>arrow_drop_up</mat-icon>10.25%
+          </button>
+        </section>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="cardThumbs">
+    <mat-card-title>
+      <section fxLayoutAlign="center center">
+        <button mat-fab color="primary">
+          <mat-icon>attach_money</mat-icon>
+        </button>
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          3514
+        </section>
+      </section>
+    </mat-card-title>
+    <mat-card-content>
+      <section style="padding-top:20px;" fxLayoutAlign="center center">
+        Total Orders: 892,541
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-flat-button>
+            <mat-icon>arrow_drop_up</mat-icon>8.38%
+          </button></section>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="cardThumbs">
+    <mat-card-title>
+      <section fxLayoutAlign="center center">
+        <button mat-fab color="warn">
+          <mat-icon>face</mat-icon>
+        </button>
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">32,548</section>
+      </section>
+    </mat-card-title>
+    <mat-card-content>
+      <section style="padding-top:20px;" fxLayoutAlign="center center">
+        Avg. Visitors: 24,511
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-flat-button>
+            <mat-icon>arrow_drop_up</mat-icon>22.58%
+          </button>
+        </section>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="cardThumbs">
+    <mat-card-title>
+      <section fxLayoutAlign="center center">
+        <button mat-fab color="primary">
+          <mat-icon>airport_shuttle</mat-icon>
+        </button>
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          5210
+        </section>
+      </section>
+    </mat-card-title>
+    <mat-card-content>
+      <section style="padding-top:20px;" fxLayoutAlign="center center">
+        Total Deliveries: 95,251
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-flat-button>
+            <mat-icon>arrow_drop_up</mat-icon>3.05%
+          </button></section>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="cardThumbs">
+    <mat-card-title>
+      <section fxLayoutAlign="center center">
+        <button mat-fab>
+          <mat-icon>thumb_up</mat-icon>
+        </button>
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          120
+        </section>
+      </section>
+    </mat-card-title>
+    <mat-card-content>
+      <section style="padding-top:20px;" fxLayoutAlign="center center">
+        Approvals: 390,257
+        <section fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-flat-button>
+            <mat-icon>arrow_drop_up</mat-icon>0.03%
+          </button></section>
+      </section>
+    </mat-card-content>
+  </mat-card>
+</section>
+<section class="containerchart" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-md="20px" fxLayoutAlign="center top">
+  <mat-card class="cardMothlyEarnings">
+    <mat-card-header>
+      Monthly Earnings
+      <section fxLayout="row" fxLayoutAlign="center center" style="padding-top:50px;padding-bottom:50px;">
+          <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <section style="margin-bottom:20px;">
+              <button mat-mini-fab color="primary">
+                <mat-icon>arrow_drop_up</mat-icon>
+              </button>
+            </section>
+            <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$1585</label>
+              <label>Weekly Earnings</label>
+            </section>
+          </section>
+          <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+              <section style="margin-bottom:20px;">
+                <button mat-mini-fab color="warn">
+                  <mat-icon>arrow_drop_down</mat-icon>
+                </button>
+              </section>
+              <section fxLayout="column" fxLayoutAlign="center center">
+                <label>$6,451</label>
+                <label>Monthly Earnings</label>
+              </section>
+            </section>
+            <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+                <section style="margin-bottom:20px;">
+                  <button mat-mini-fab color="primary">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                  </button>
+                </section>
+                <section fxLayout="column" fxLayoutAlign="center center">
+                  <label>$84,574</label>
+                  <label>Yarly Earnings</label>
+                </section>
+              </section>
+        </section>
+    </mat-card-header>
+    <mat-card-content style="min-height:250px;">
+      <section fxLayout="row" fxLayoutAlign="center center">
+        <div class="chart-container" style="position: relative; height:20vh; width:40vw">
+          <canvas id="barChart"></canvas>
+        </div>
+      </section>
+    </mat-card-content>
+  </mat-card>
+  <mat-card class="cardSalesAnalytics">
+    <mat-card-header>
+      Sales Analytics
+      <section fxLayout="row" fxLayoutAlign="center center" style="padding-top:50px;padding-bottom:50px;">
+          <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <section style="margin-bottom:20px;">
+              <button mat-mini-fab color="primary">
+                <mat-icon>arrow_drop_up</mat-icon>
+              </button>
+            </section>
+            <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$1585</label>
+              <label>Weekly Earnings</label>
+            </section>
+          </section>
+          <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+              <section style="margin-bottom:20px;">
+                <button mat-mini-fab color="warn">
+                  <mat-icon>arrow_drop_down</mat-icon>
+                </button>
+              </section>
+              <section fxLayout="column" fxLayoutAlign="center center">
+                <label>$6,451</label>
+                <label>Monthly Earnings</label>
+              </section>
+            </section>
+        </section>
+    </mat-card-header>
+    <mat-card-content>
+      <canvas id="pieChart"></canvas>
+    </mat-card-content>
+  </mat-card>
+</section>
+<section class="containerchartthumbs" fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap.gt-md="20px" fxLayoutAlign="center top"
+style="padding-left: 10px; padding-right: 10px;">
+  <mat-card class="cardChartThumbs">
+    <mat-card-title>
+      Recent stock
+    </mat-card-title>
+    <mat-card-content>
+      <canvas id="recentStock"></canvas>
+      <section fxLayoutAlign="center center" style="margin-top:20px;">
+        <button mat-raised-button>View All Data</button>
+      </section>
+    </mat-card-content>
+    <mat-card-footer>
+      <section fxLayout="row" fxLayoutAlign="center center">
+        <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <label>$1585</label>
+            <label>Weekly Earnings</label>
+        </section>
+        <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$6,451</label>
+              <label>Monthly Earnings</label>
+          </section>
+      </section> 
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="cardChartThumbs">
+    <mat-card-title>
+      Purchase Orders
+    </mat-card-title>
+    <mat-card-content>
+      <canvas id="purchaseOrders"></canvas>
+      <section fxLayoutAlign="center center" style="margin-top:20px;">
+        <button mat-raised-button>View All Data</button>
+      </section>
+    </mat-card-content>
+    <mat-card-footer>
+      <section fxLayout="row" fxLayoutAlign="center center">
+        <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <label>$1585</label>
+            <label>Weekly Earnings</label>
+        </section>
+        <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$6,451</label>
+              <label>Monthly Earnings</label>
+          </section>
+      </section> 
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="cardChartThumbs">
+    <mat-card-title>
+      Shipped Orders
+    </mat-card-title>
+    <mat-card-content>
+      <canvas id="shippedOrders"></canvas>
+      <section fxLayoutAlign="center center" style="margin-top:20px;">
+        <button mat-raised-button>View All Data</button>
+      </section>
+    </mat-card-content>
+    <mat-card-footer>
+      <section fxLayout="row" fxLayoutAlign="center center">
+        <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <label>$1585</label>
+            <label>Weekly Earnings</label>
+        </section>
+        <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$6,451</label>
+              <label>Monthly Earnings</label>
+          </section>
+      </section> 
+    </mat-card-footer>
+  </mat-card>
+  <mat-card class="cardChartThumbs">
+    <mat-card-title>
+      Cancelled Orders
+    </mat-card-title>
+    <mat-card-content>
+      <canvas id="cancelledOrders"></canvas>
+      <section fxLayoutAlign="center center" style="margin-top:20px;">
+        <button mat-raised-button>View All Data</button>
+      </section>
+    </mat-card-content>
+    <mat-card-footer>
+      <section fxLayout="row" fxLayoutAlign="center center">
+        <section fxLayout="column" fxLayoutAlign="center center" style="margin:20px;">
+            <label>$1585</label>
+            <label>Weekly Earnings</label>
+        </section>
+        <section fxLayout="column" fxLayoutAlign="center center">
+              <label>$6,451</label>
+              <label>Monthly Earnings</label>
+          </section>
+      </section> 
+    </mat-card-footer>
+  </mat-card>
+</section>

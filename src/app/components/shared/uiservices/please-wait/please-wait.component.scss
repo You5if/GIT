@@ -1,0 +1,15 @@
+.prog {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100px;
+  flex-direction: column;
+}
+
+// .img {
+//   width: 100px;
+//   height: 150px;
+// }
+::ng-deep .load > .mat-dialog-container {
+  border-radius: 5px;
+}

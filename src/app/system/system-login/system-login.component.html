@@ -1,0 +1,108 @@
+<mat-drawer-container  class="example-container" autosize>
+  <mat-drawer   #drawer class="example-sidenav" mode="side">
+
+    <div class="logo_container">
+      <h1 class="logo">Logo</h1>
+    </div>
+
+    <hr>
+
+    <ul class="side_list" id="myDIV">
+      <!-- <li (click)="onClickListItem('H')" class="side_list_item active">Home</li>
+      <li (click)="onClickListItem('BP')" class="side_list_item">Business profile</li>
+      <li (click)="onClickListItem('J')" class="side_list_item">Journal Entry</li>
+      <li (click)="onClickListItem('E')" class="side_list_item">Expense</li>
+      <li (click)="onClickListItem('T')" class="side_list_item">Tax</li>
+      <li (click)="onClickListItem('F')" class="side_list_item">Forex</li>
+      <li (click)="onClickListItem('A')" class="side_list_item">Account</li> -->
+    </ul>
+
+
+    <!-- <div class="lang_container">
+      <h3 class="lang">Change to: </h3>
+      <button (click)="onChangeLanguage()" class="add_btn">{{lang}}</button>
+    </div> -->
+
+    <!-- <ul class="side_list">
+      <li class="side_list_item"><a class="side_list_item_link" href="">Home</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Bank</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Forex</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Journal</a></li>
+    </ul> -->
+  </mat-drawer>
+
+    <mat-drawer-content>
+
+      <mat-toolbar >
+        <div fxLayout fxLayoutGap.xs="10px" class="nav">
+          <div fxFlex fxLayout fxLayoutAlign="flex-start">
+            <button class="toggle_btn" type="button" mat-icon-button (click)="drawer.toggle()">
+              <mat-icon>menu</mat-icon>
+            </button>
+          </div>
+
+          <div class="middle" fxLayout  fxLayoutGap="20px">
+            <div class="search_container" >
+              <input type="text" matInput class="search">
+              <mat-icon class="search_icon" aria-label="Example home icon">search</mat-icon>
+            </div>
+
+            <!-- <button  fxHide.xs mat-icon-button class="add_btn" >
+              <mat-icon >add</mat-icon>
+            </button> -->
+
+          </div>
+
+         <div fxHide.xs fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with heart icon">
+            <mat-icon>info_outline</mat-icon>
+          </button>
+          <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with share icon">
+           <mat-icon>perm_identity</mat-icon>
+           <!-- <mat-icon>person_outline</mat-icon> -->
+
+         </button>
+         </div>
+        </div>
+      </mat-toolbar>
+
+
+
+      <!-- <div class="actions_box_container">
+        <div class="actions_box">
+          <div [ngSwitch]="navigation">
+            <div *ngSwitchCase="'Home'">
+              <app-system-home></app-system-home>
+            </div>
+            <div *ngSwitchCase="'BusinessProfile'">
+              <app-system-business-profile ></app-system-business-profile>
+            </div>
+            <div *ngSwitchCase="'Tax'">
+              <app-tax ></app-tax>
+            </div>
+            <div *ngSwitchCase="'Account'">
+              <app-account ></app-account>
+            </div>
+            <div *ngSwitchCase="'Forex'">
+              <app-forex ></app-forex>
+            </div>
+            <div *ngSwitchCase="'JournalEntry'">
+              <app-journalentry></app-journalentry>
+            </div>
+            <div *ngSwitchCase="'Expense'">
+              <app-expensefiling></app-expensefiling>
+            </div>
+          </div>
+
+        </div>
+      </div> -->
+
+
+
+
+    </mat-drawer-content>
+
+
+
+</mat-drawer-container>
+

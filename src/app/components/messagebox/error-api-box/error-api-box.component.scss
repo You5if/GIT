@@ -1,0 +1,27 @@
+table {
+  border: black;
+  border-style: solid;
+  border-width: thin;
+  border-spacing: 0;
+}
+td {
+  padding: 2px;
+  border: black;
+  border-style: solid;
+  border-width: thin;
+}
+.add_btn {
+  background: #20bf6b;
+  outline: none;
+  border: none;
+  margin: 10px 8px;
+  float: right;
+
+  color: white;
+}
+.cen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}

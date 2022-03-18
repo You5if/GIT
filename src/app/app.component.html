@@ -1,0 +1,12 @@
+<!-- <mat-sidenav-container>
+    <mat-sidenav #sidenav role="navigation">
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+
+        <app-landing-menu *ngIf="!isLoggedIn()"></app-landing-menu>
+        <app-menu-bar *ngIf="isLoggedIn()"></app-menu-bar>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+<app-navigation (childOutput)="receiveOutput($event)" [class.DarkTheme]="parentValue"></app-navigation>
+<!-- <app-system-navigation ></app-system-navigation> -->

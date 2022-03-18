@@ -1,0 +1,60 @@
+<div class="log">
+  <section   #loginForm>
+    <mat-card>
+      <div class="container">
+      <div class="img_container fade-in">
+        <img class="img" src="../../../../../assets/images/svg/git-logo-white1.png" alt="">
+      </div>
+      <h1>Login</h1>
+      <form #f="ngForm"  (ngSubmit)="submit(f)">
+        <div class="input1"> 
+          <!-- <mat-form-field  appearance="outline">
+            <mat-label>User name</mat-label>
+            <input matInput placeholder="Your email" type="email" email required maxlength="255" #emailInput="ngModel" (ngModel)="pModel.username" name="username">
+            <mat-error *ngIf="emailInput.hasError('required')">Email cannot be blank!</mat-error>
+            <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid!</mat-error>
+          </mat-form-field> -->
+          <label>Username</label>
+          <input placeholder="Email" type="email" email required maxlength="255" #emailInput="ngModel" (ngModel)="pModel.username" name="username">
+        </div>
+        
+        <div class="input2">
+          <!-- <mat-form-field  appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Your password" type="password" required minlength="8" maxlength="50" #passwordInput="ngModel" (ngModel)="pModel.password" name="password">
+            <mat-error>Should be at least 8 characters long.</mat-error>
+          </mat-form-field> -->
+          <label>Password</label>
+          <input placeholder="Password" type="password" required minlength="8" maxlength="50" #passwordInput="ngModel" (ngModel)="pModel.password" name="password">
+        </div>
+      
+      <button mat-flat-button [disabled]="f.invalid" color="basic">Login</button>
+      <p>Powered by <a href="https://www.markoncs.com/">MCS</a></p>
+    </form>
+    
+      <!-- <div  style=" display: flex; justify-content: center;" class="links">
+        <div>
+          <p>في حالة نسيان كلمة السر ارجع الى المسؤول التقني
+            (0901625113)
+          </p>
+        </div>
+      </div> -->
+    </div>
+    </mat-card>
+   
+  
+  
+  </section>
+</div>
+
+<!-- <ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+  <ng-container *ngTemplateOutlet="loginForm">
+  </ng-container>
+</ng-template>
+
+<ng-template #bigScreen>
+  <mat-card>
+    <ng-container *ngTemplateOutlet="loginForm">
+    </ng-container>
+  </mat-card>
+</ng-template> -->

@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <button mat-mini-fab (click)="onAdd()"><mat-icon>add</mat-icon></button>
+  <h1>Users</h1>
+  <div>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    </mat-form-field>
+  </div>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card *ngFor="let record of dataList">
+    <mat-card-title-group>
+      <mat-card-title>{{ record.invoiceNumber }}</mat-card-title>
+      <mat-card-subtitle>{{ record.paymentDate | date: 'MMM d, y'  }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ record.paymentAmount | currency }}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-icon [matMenuTriggerFor]="menu" class="option-icon">more_vert</mat-icon>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="onView(record.sdDispatchPlanPaymentId)">View</button>
+      <button mat-menu-item (click)="onEdit(record.sdDispatchPlanPaymentId)">Edit</button>
+    </mat-menu>
+  </mat-card>
+</div>

@@ -1,0 +1,24 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Vehicle Expense Date
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form [formGroup]="myForm">
+      <mat-form-field>
+          <mat-label>From</mat-label>
+          <input matInput [matDatepicker]="vehicleExpenseDatePickerFrom" formControlName="from" (input)="onFromChange()">
+          <mat-datepicker-toggle matSuffix [for]="vehicleExpenseDatePickerFrom"></mat-datepicker-toggle>
+          <mat-datepicker #vehicleExpenseDatePickerFrom></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field>
+          <mat-label>To</mat-label>
+          <input matInput [matDatepicker]="vehicleExpenseDatePickerTo" formControlName="to" (input)="onToChange()">
+          <mat-datepicker-toggle matSuffix [for]="vehicleExpenseDatePickerTo"></mat-datepicker-toggle>
+          <mat-datepicker #vehicleExpenseDatePickerTo></mat-datepicker>
+      </mat-form-field>
+  `</form>
+  </ng-template>
+</mat-expansion-panel>

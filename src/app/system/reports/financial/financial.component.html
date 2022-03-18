@@ -1,0 +1,167 @@
+<mat-toolbar>
+
+  <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
+
+    <section class="fontY">
+      Financial reports
+    </section>
+
+    <section fxFlex fxLayout fxLayoutAlign="flex-end"  fxLayoutGap="10px">
+
+      <!-- <button class="add_btn" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon >add</mat-icon></button> -->
+      <!-- <button mat-button color="primary" (click)="openEntry()">Filter</button>
+      <button mat-button color="primary" (click)="onSort()">Sort</button>
+      <button mat-button color="primary" (click)="openEntry()" [disabled]="!screenRights.printFlag">Print</button>
+      <button mat-button color="primary" (click)="refreshMe()">Refresh</button>
+
+      <mat-form-field [ngStyle]="{'float':'right', 'margin-right':'60px'}">
+
+        <input matInput (keyup)="applyFilter($event.target.value)">
+
+        <mat-placeholder>
+
+          <mat-icon>search</mat-icon>
+
+        </mat-placeholder>
+
+      </mat-form-field> -->
+
+    </section>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<!-- <Section [ngClass]="['custom-table-container']"> -->
+<Section [dir]="direction"  class="toolSection" mat-elevation-z8>
+
+  <mat-table #table [dataSource]="dataSource"  style="width: 100%">
+
+    
+    <ng-container matColumnDef="report">      <mat-header-cell class="centH" *matHeaderCellDef>Report</mat-header-cell>     <mat-cell mat-cell class="cent" *matCellDef="let row">{{row.report}}</mat-cell>
+    </ng-container>
+
+    
+    
+    
+
+    <!-- edit Column -->
+    <ng-container matColumnDef="from">
+      <mat-header-cell class="centH" *matHeaderCellDef>From</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <mat-form-field class="matD"> 
+          <input matInput name="date"  type="date" [(ngModel)]="row.fromDate" > 
+        </mat-form-field> 
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="to">
+      <mat-header-cell class="centH" *matHeaderCellDef>To</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <mat-form-field class="matD"> 
+          <input matInput name="date"  type="date" [(ngModel)]="row.toDate" > 
+        </mat-form-field> 
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="currency">
+      <mat-header-cell class="centH" *matHeaderCellDef>Currency</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <mat-form-field class="matC" >
+          <mat-select [(ngModel)]="row.currency" matNativeControl name="currency" [placeholder]="currency"
+            >
+            <mat-option *ngFor="let item of row.value" [value]="item.id">
+              {{item.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="fetch">
+      <mat-header-cell class="centH" *matHeaderCellDef>Fetch</mat-header-cell>
+      <mat-cell class="cent" mat-cell *matCellDef="let row">
+        <button class="Btn" mat-icon-button color="primary" class="Btn" (click)="onReport(row.report,row.fromDate, row.toDate, row.currency)" [disabled]="!screenRights.editFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true">printer</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- delete Column -->
+    <ng-container matColumnDef="delete">
+      <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button class="Btn" mat-icon-button color="primary"
+          (click)="onDelete(row.journalEntryId)" [disabled]="!screenRights.deleteFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="warn">delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <!-- view Column -->
+    <ng-container matColumnDef="view">
+      <mat-header-cell *matHeaderCellDef>View</mat-header-cell>
+      <mat-cell mat-cell *matCellDef="let row"><button class="Btn" mat-icon-button color="primary" (click)="onView(row.journalEntryId)"
+          [disabled]="!screenRights.viewFlag">
+          <mat-icon small class="mat-icon material-icons" role="img" aria-hidden="true" color="primary">visibility
+          </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row class="headerRow" *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+      [ngClass]="{hovered: row.hovered, highlighted: row.highlighted}" (click)="row.highlighted = !row.highlighted"
+      (mouseover)="row.hovered = true" (mouseout)="row.hovered = false"></mat-row>
+
+  </mat-table>
+
+</Section>
+
+<!-- <section [dir]="direction" class="cards_section" fxShow.xs>
+  <div *ngFor="let index of indexes">
+    <mat-card fxLayout class="card">
+      <div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{entryDate}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.entryDate | date}}</h3>
+        </div>
+        
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{creditacc}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.creditAccount }}</h3>
+        </div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{debitacc}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.debitAccount }}</h3>
+        </div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{amount}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.debit }}</h3>
+        </div>
+        <div fxLayoutGap="5px" class="index_row">
+          <h3>{{currency}}</h3>
+          <h3>:</h3>
+          <h3 class="indexContent">{{ index.currency }}</h3>
+        </div>
+      </div>
+      <div>
+        <button class="Btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>more_vert</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onEdit(index.journalEntryId)" class="Btn" mat-menu-item>{{edit}}</button>
+  
+</mat-menu>
+      </div>
+    </mat-card>
+
+  </div>
+</section> -->
+
+
+<div class="paginator">
+  <mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>
+
+</div>

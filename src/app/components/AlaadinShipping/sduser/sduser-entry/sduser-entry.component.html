@@ -1,0 +1,52 @@
+<h1 mat-dialog-title>{{dialog_title}}</h1>
+
+<div mat-dialog-content>
+  <form #sduserForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Display Name</mat-label>
+      <input matInput name="displayName" type="text" [(ngModel)]="pModel.displayName"
+        [readonly]="pModel.entryMode === 'E' || pModel.entryMode === 'V'" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Username</mat-label>
+      <input matInput type="email" email required maxlength="255" #emailInput="ngModel" [(ngModel)]="pModel.sdUserName"
+        name="username" [readonly]="pModel.entryMode === 'E' || pModel.entryMode === 'V'">
+      <mat-error *ngIf="emailInput.hasError('required')">Email cannot be blank!</mat-error>
+      <mat-error *ngIf="!emailInput.hasError('required')">Email is invalid!</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" *ngIf="pModel.entryMode === 'A'">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" required minlength="8" maxlength="50" #passwordInput="ngModel"
+        [(ngModel)]="pModel.password" name="password">
+      <mat-error>Should be at least 8 characters long.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select matNativeControl name="roleId" [(ngModel)]="pModel.roleId">
+        <mat-option *ngFor="let item of roleNames" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <mat-select matNativeControl name="sdCompanyId" [(ngModel)]="pModel.sdCompanyId"
+        [disabled]="pModel.entryMode === 'E' || pModel.entryMode === 'V'">
+        <mat-option *ngFor="let item of companyTypes" [value]="item.id"> {{item.name}} </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="cta">
+
+  <button mat-flat-button type="button" class="sleep" (click)="onCancel()">Cancel</button>
+  <button *ngIf="pModel.entryMode=='D'" mat-flat-button color="warn" [disabled]="sduserForm.invalid" type="submit"
+    (click)="onSubmit(sduserForm.value)">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-flat-button color="accent"
+    [disabled]="sduserForm.invalid" (click)="onSubmit(sduserForm.value)">Submit</button>
+</div>

@@ -1,0 +1,68 @@
+<mat-toolbar>
+  <button mat-mini-fab (click)="onAdd()" color="accent"><mat-icon>add</mat-icon></button>
+  <h1>Dispatch Plans</h1>
+  <span></span>
+</mat-toolbar>
+
+
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" [gutterSize]="'0.5'">
+  <mat-grid-tile *ngFor="let record of dataList">
+      <mat-card class="mat-elevation-z0">
+          <mat-card-title>
+              {{ record.customerName }}
+          </mat-card-title>
+          <mat-card-subtitle>
+              {{ record.planStatus }}
+          </mat-card-subtitle>
+          <mat-card-content (click)="onView(record.sdDispatchPlanId)">
+              <div>
+                  <h1>Shipping Line</h1>
+                  {{ record.shippingLineCompany }}
+              </div>
+              
+              <div>
+                  <h1>Booking</h1>
+                  {{ record.company }}
+              </div>
+              
+              <div>
+                  <h1>Loading Plan No.</h1>
+                  {{ record.loadingPlanNumber }}
+              </div>
+              <div>
+                  <h1>Plan Code</h1>
+                  {{ record.planCode }}
+              </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <mat-icon [matMenuTriggerFor]="menu" class="options">more_vert</mat-icon>
+          </mat-card-actions>
+      </mat-card>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onEdit(record.sdDispatchPlanId)" [disabled]="!screenRights.editFlag">
+          <mat-icon>edit</mat-icon>Edit Plan
+        </button>
+
+        <button mat-menu-item (click)="onAddExpense(record.sdDispatchPlanId)" [disabled]="!screenRights.editFlag">
+          <mat-icon>monetization_on</mat-icon>Plan Expenses
+        </button>
+
+        <button mat-menu-item (click)="onViewInvoice(record.sdDispatchPlanInvoiceId)" [disabled]="!screenRights.editFlag">
+          <mat-icon>assignment</mat-icon> Invoice
+        </button>
+
+        <button mat-menu-item (click)="onVEdit(record.sdDispatchPlanId)" [disabled]="!screenRights.editFlag">
+          <mat-icon>local_shipping</mat-icon>Plan Vehicles
+        </button>
+
+        <!-- <button mat-menu-item (click)="onDelete(record.sdDispatchPlanId)" [disabled]="!screenRights.deleteFlag">
+          <mat-icon color="warn">delete</mat-icon>Delete Plan
+        </button> -->
+      </mat-menu> 
+  </mat-grid-tile>
+
+</mat-grid-list>
+
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>

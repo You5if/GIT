@@ -1,0 +1,21 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Payment Type
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+      <form [formGroup]="paymentTypeFilter">
+          <mat-form-field>
+                <mat-label>Payment Type</mat-label>
+                <mat-select multiple formControlName="paymentType">
+                    <mat-option value="Cash">Cash</mat-option>
+                    <mat-option value="Certified Funds">Certified Funds</mat-option>
+                    <mat-option value="Company Check">Company Check</mat-option>
+                    <mat-option value="Comcheck">ComCheck</mat-option>
+                    <mat-option value="TCH">TCH</mat-option>
+                </mat-select>
+          </mat-form-field>
+      </form>
+  </ng-template>
+</mat-expansion-panel>

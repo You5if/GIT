@@ -1,0 +1,62 @@
+<mat-toolbar>
+
+  <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
+    <div class="bigMain" fxLayout>
+      <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+    </div>
+
+    <section class="fontY">
+      <!-- <i class="far fa-user"></i> -->
+      {{header}}
+    </section>
+
+    <section class="sec"  >
+
+      <button class="add_btn" mat-button color="primary" (click)="onAdd()" [disabled]="!screenRights.createFlag"><mat-icon>add</mat-icon></button>
+    </section>
+
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<section class="section" [dir]="direction">
+  
+
+  <!-- <div class="head">
+    <i class="far fa-user"></i>
+    <h2 class="headText">{{name}} workspace</h2>
+  </div> -->
+  <section class="section" [dir]="direction">
+      <div class="container">
+        <mat-grid-list
+          [cols]="breakpoint"
+          rowHeight="105px"
+          (window:resize)="onResize($event)"
+  
+        >
+          <div  *ngFor="let board of boards">
+            
+              <mat-grid-tile>
+                <div class="board" (click)="onBoardState(board.boardTemplateId)">
+                  <h4 class="boardName">{{board.tempName}}</h4>
+                </div>
+              </mat-grid-tile>
+              
+  
+          
+          </div>
+        </mat-grid-list>
+      </div>
+  </section>
+  
+</section>
+
+
+<!-- <Section [ngClass]="['custom-table-container']"> -->
+
+
+
+<!-- <button (click)="onId()">
+  id
+</button> -->
+

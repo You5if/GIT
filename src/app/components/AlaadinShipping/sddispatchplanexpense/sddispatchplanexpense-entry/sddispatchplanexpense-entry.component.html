@@ -1,0 +1,83 @@
+<div class="header">
+  <h1 mat-dialog-title>{{dialog_title}} Expneses</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form #sddispatchplanexpenseForm="ngForm">
+
+    <mat-form-field appearance="outline" class="md-top">
+      <mat-label>Expense Date</mat-label>
+      <input matInput name="expenseDate" [matDatepicker]="expenseDate" [(ngModel)]="pModel.expenseDate"
+        [readonly]="pModel.readOnly" required>
+      <mat-datepicker-toggle matSuffix [for]="expenseDate"></mat-datepicker-toggle>
+      <mat-datepicker #expenseDate></mat-datepicker>
+    </mat-form-field>
+
+    <mat-divider></mat-divider>
+
+    <div class="md-1">
+      <mat-form-field appearance="outline">
+        <mat-label>Billable Item</mat-label>
+        <mat-select matNativeControl name="billableItemId" [(ngModel)]="pModel.billableItemId"
+          [disabled]="pModel.readOnly">
+          <mat-option *ngFor="let item of billableItems" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Supplier</mat-label>
+        <input matInput name="description" type="text" [(ngModel)]="pModel.description" [readonly]="pModel.readOnly"
+          required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Payment Type</mat-label>
+        <mat-select matNativeControl name="paymentTypeId" [(ngModel)]="pModel.paymentTypeId"
+          [disabled]="pModel.readOnly">
+          <mat-option *ngFor="let item of paymentTypes" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="md-2">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Cost Price</mat-label>
+        <input matInput name="costPrice" type="number" [(ngModel)]="pModel.costPrice" [readonly]="pModel.readOnly"
+          required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Selling Price</mat-label>
+        <input matInput name="amount" type="number" [(ngModel)]="pModel.amount" [readonly]="pModel.readOnly" required>
+      </mat-form-field>
+
+
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <mat-form-field appearance="outline" class="md-bottom">
+      <mat-label>Reference</mat-label>
+      <input matInput name="referenceNumber" type="text" [(ngModel)]="pModel.referenceNumber"
+        [readonly]="pModel.readOnly" required>
+    </mat-form-field>
+  </form>
+</div>
+
+
+<div mat-dialog-actions class="cta">
+  <div></div>
+  <button *ngIf="pModel.entryMode=='D'" mat-raised-button [disabled]="sddispatchplanexpenseForm.invalid" type="submit"
+    color="warn" (click)="onSubmit(sddispatchplanexpenseForm.value)">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button
+    [disabled]="sddispatchplanexpenseForm.invalid" (click)="onSubmit(sddispatchplanexpenseForm.value)" type="button"
+    color="accent">Submit</button>
+</div>

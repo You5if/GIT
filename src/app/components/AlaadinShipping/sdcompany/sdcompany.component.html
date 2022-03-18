@@ -1,0 +1,24 @@
+<mat-toolbar>
+  <div></div>
+  <h1>Companies</h1>
+  <span></span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card *ngFor="let record of dataList">
+    <mat-card-title-group>
+      <mat-card-title>{{ record.company }}</mat-card-title>
+      <mat-card-subtitle>{{ record.city }}</mat-card-subtitle>
+      <mat-card-subtitle>{{ record.address }}</mat-card-subtitle>
+    </mat-card-title-group>
+    <mat-icon [matMenuTriggerFor]="menu">more_vert</mat-icon>
+    <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onEdit(record.sdCompanyId)">Edit</button>
+    </mat-menu>
+  </mat-card> 
+</div>
+
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>
+

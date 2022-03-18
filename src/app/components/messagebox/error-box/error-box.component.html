@@ -1,0 +1,12 @@
+<mat-card class="mat-elevation-z0">
+  <div class="warningBox">
+    <h1 mat-dialog-title>{{data.boxTitle}}</h1>
+    <div mat-dialog-content>
+        <p>{{data.errorMessage}}</p>
+    </div>
+    <div class="cen">
+      <button class="add_btn" mat-button (click)="closeDialog()">Ok</button>
+    </div>
+  </div>
+</mat-card>
+

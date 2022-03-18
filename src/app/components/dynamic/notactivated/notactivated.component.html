@@ -1,0 +1,29 @@
+<div *ngIf="role === '-1'">
+  <ng-template #notActivated>
+    <div>
+      <h1>Activate your account</h1>
+      <p>
+        <!-- Welcome {{userid}} your user has not been activated yet, please check your e-mail to activate your account. Click below button to re-send activation link to your e-mail -->
+        Please check your e-mail to activate your account. Resend key if not received.
+      </p>
+      <p>
+        Didn't receive an e-mail?<br><a type="button" (click)="onNext()">Re-send Activation Link</a>
+      </p>
+    </div>
+  </ng-template>
+  
+  <ng-template [ngIf]="smallScreen" [ngIfElse]="bigScreen">
+    <ng-container *ngTemplateOutlet="notActivated">
+    </ng-container>
+  </ng-template> 
+  
+  <ng-template #bigScreen>
+    <mat-card>
+      <ng-container *ngTemplateOutlet="notActivated">
+      </ng-container>  
+    </mat-card>
+  </ng-template>
+</div>
+<div *ngIf="role === '5'" style="margin: 2em auto;">
+  <h1>Your account has been suspended! <br> Contact system administrator!</h1>
+</div>

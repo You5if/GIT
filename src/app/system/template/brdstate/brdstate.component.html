@@ -1,0 +1,111 @@
+<mat-toolbar>
+
+  <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
+    <div class="bigMain" fxLayout>
+      <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+    </div>
+
+    <section class="fontY">
+      <!-- <i class="far fa-user"></i> -->
+      {{name}}
+    </section>
+
+    <div class="circlesRow">
+      <div class="circle" *ngFor='let item of members; let i = index'>
+        {{ i +1  < 4  ? getInitials(item , i) : '+'  +  (members.length - i) }}
+      </div>
+    </div>
+
+    
+  </mat-toolbar-row>
+
+</mat-toolbar>
+
+<section class="states">
+  
+    <div  fxLayout cdkDropListGroup cdkScrollable >
+      <div *ngFor="let state of states" class="example-container">
+        <h2>{{state.stateName}}</h2>
+    
+        <div
+          cdkDropList
+          [cdkDropListData]="state.cardArray"
+          class="example-list"
+          (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of state.cardArray" cdkDrag>{{item.title}}</div>
+        </div>
+        <button class="add_btn2" *ngIf="state.AddC" mat-button color="primary" (click)="onAddC(state.stateTemplateId)" [disabled]="!screenRights.createFlag"><mat-icon>add</mat-icon></button>
+    <mat-form-field *ngIf="!state.AddC" appearance="outline">
+      <mat-label>Card name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="lastCard.title"
+        name="CardName"
+        placeholder="Card name"
+      />
+
+
+    </mat-form-field>
+    <div class="btns">
+      <button class="cancel_btn" *ngIf="!state.AddC" mat-button color="primary" (click)="onCancelCard()" [disabled]="!screenRights.createFlag">Cancel</button>
+    <button class="add_btn" *ngIf="!state.AddC" mat-button color="primary" (click)="onSaveCard(state.stateTemplateId)" [disabled]="!screenRights.createFlag">Save</button>
+        
+    </div>
+      </div>
+  
+  
+    <!-- <div class="example-container">
+      <h2>Done</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="done"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>Done</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="done"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+    <div class="example-container">
+      <h2>Done</h2>
+  
+      <div
+        cdkDropList
+        [cdkDropListData]="done"
+        class="example-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="example-box" *ngFor="let item of done" cdkDrag>{{item}}</div>
+      </div>
+    </div> -->
+  </div>
+  <section class="sec"  >
+    <h2>Add list</h2>
+    <button class="add_btn2" *ngIf="Add" mat-button color="primary" (click)="onAddN()" [disabled]="!screenRights.createFlag"><mat-icon>add</mat-icon></button>
+    <mat-form-field *ngIf="!Add" appearance="outline">
+      <mat-label>List name</mat-label>
+      <input
+        matInput
+        [(ngModel)]="listName"
+        name="listName"
+        placeholder="List name"
+      />
+
+
+    </mat-form-field>
+    <div class="btns">
+      <button class="cancel_btn" *ngIf="!Add" mat-button color="primary" (click)="onCancelList()" [disabled]="!screenRights.createFlag">Cancel</button>      
+      <button class="add_btn" *ngIf="!Add" mat-button color="primary" (click)="onSave()" [disabled]="!screenRights.createFlag">Save</button> 
+    </div>
+  </section>
+  
+</section>

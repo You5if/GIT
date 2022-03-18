@@ -1,0 +1,397 @@
+<mat-drawer-container autosize  [dir]="direction" (window:resize)="onResize($event)"  class="example-container">
+  <!-- <mat-drawer   #drawer class="example-sidenav" mode="side" [opened]="break"> -->
+  <mat-drawer   #drawer class="example-sidenav" mode="side" [(opened)]="break"
+  mwlResizable
+  
+              [enableGhostResize]="true"
+              [ngStyle]="resizeStyle"
+              [validateResize]="resizeValidate"
+              [resizeEdges]="resizeEdges()"
+              (resizeEnd)="onResizeEnd($event)"
+              >
+
+    <div fxLayout class="logo_container">
+      
+        <div class="user" (click)="onClickListItem('H')">
+          <img  class="user_img" src="../../../assets/images/svg/user (1).png" alt="">
+          
+          
+        </div>
+      
+      <div  fxFlex fxLayout fxLayoutAlign="flex-start">
+        <button class="toggle_btn3" type="button"  mat-icon-button (click)="drawer.toggle(); onToggle()">
+
+          <mat-icon *ngIf="direction==='ltr'">chevron_left</mat-icon>
+          <mat-icon *ngIf="direction==='rtl'">chevron_right</mat-icon>
+          <!-- <mat-icon>fast_rewind</mat-icon> -->
+        </button>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="menu_item">
+      <ul class="side_list" id="myDIV">
+        <li (click)="onClickListItem('H')" fxHide class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> {{home}}</div></li>
+        
+        <li (click)="onClickListItem('BP')" fxHide class="side_list_item"><mat-icon>person</mat-icon><div class="title"> {{businessP}}</div></li>
+        <!-- <mat-divider></mat-divider>
+        <div  class="main_title">
+          <span class="fon">{{accounting}}</span>
+        </div>
+        <mat-divider ></mat-divider> -->
+        <!-- <li (click)="onClickListItem('ECharts')" class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> E-Charts</div></li> -->
+        <!-- <li (click)="onClickListItem('Charts')" class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> Charts</div></li> -->
+        <!-- <li  (click)="onClickListItem('J')" class="side_list_item"><mat-icon>library_books</mat-icon><div class="title"> {{journal}}</div></li> -->
+        <!-- <li (click)="onClickListItem('JD')" class="side_list_item"><mat-icon>library_books</mat-icon><div class="title"> Journal Dynamic</div></li> -->
+        <!-- <li  (click)="onClickListItem('E')" class="side_list_item"><mat-icon> local_atm</mat-icon><div class="title"> {{expense}}</div></li> -->
+        <!-- <li (click)="onClickListItem('PFC')" class="side_list_item"><i class="fas fa-money-bill-wave"></i><div class="title">{{paymentFromCompany}}</div></li> -->
+        <!-- <li (click)="onClickListItem('ED')" class="side_list_item"><mat-icon> local_atm</mat-icon><div class="title">Expense Dynamic</div></li> -->
+        <!-- <mat-divider ></mat-divider>
+        <div  class="main_title">
+          <h3 class="fon">{{config}}</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li (click)="onClickListItem('T')" class="side_list_item"><mat-icon>receipt</mat-icon><div class="title"> {{tax}}</div></li>
+        <li  (click)="onClickListItem('F')" class="side_list_item"><mat-icon> attach_money</mat-icon><div class="title"> {{forex}}</div></li>
+        <li  (click)="onClickListItem('A')" class="side_list_item"><mat-icon>account_box</mat-icon><div class="title"> {{account}}</div></li>
+        <li  (click)="onClickListItem('AC')" class="side_list_item"><mat-icon> vpn_key</mat-icon><div class="title">{{accountConfiguration}}</div></li>
+        <li  (click)="onClickListItem('B')" class="side_list_item"><mat-icon>account_balance</mat-icon><div class="title">{{bank}}</div></li>
+        <li  (click)="onClickListItem('BB')" class="side_list_item"><mat-icon>account_balance</mat-icon><div class="title">{{bankBranch}}</div></li>
+        <li  (click)="onClickListItem('BA')" class="side_list_item"><mat-icon> account_balance</mat-icon><div class="title">{{bankAccount}}</div></li> -->
+        <mat-divider ></mat-divider>
+        <div  class="main_title">
+          <h3 class="fon">{{sales}}</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li  (click)="onClickListItem('C')" class="side_list_item"><mat-icon>group</mat-icon><div class="title">{{customer}}</div></li>
+        
+        <li  (click)="onClickListItem('I')" class="side_list_item"><mat-icon>description</mat-icon><div class="title">{{invoice}}</div></li>
+<!--   
+        <li  (click)="onClickListItem('PTC')" class="side_list_item"><i class="fas fa-money-bill-wave"></i><div class="title">{{paymentToCompany}}</div></li>
+        <li  (click)="onClickListItem('CTC')" class="side_list_item"><i class="fas fa-money-check-alt"></i><div class="title">{{cheque}}</div></li> -->
+        <mat-divider ></mat-divider>
+        <div *ngIf="role === '6' || role === '2'" class="main_title">
+          <h3 class="fon">{{inventory}}</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li  (click)="onClickListItem('P')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{product}}</div></li>
+        <li  (click)="onClickListItem('PC')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productCategory}}</div></li>
+        <li  (click)="onClickListItem('PG')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productGroup}}</div></li>
+        <!-- <li  (click)="onClickListItem('PU')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productUnit}}</div></li> -->
+        <li  (click)="onClickListItem('PP')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productPricing}}</div></li>
+        <!-- <li  (click)="onClickListItem('PS')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productStock}}</div></li>
+        <li  (click)="onClickListItem('PUC')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productUnitConversion}}</div></li>
+        <li  (click)="onClickListItem('W')" class="side_list_item"><i class="fas fa-warehouse"></i><div class="title">{{warehouse}}</div></li>
+        <li  (click)="onClickListItem('SI')" class="side_list_item"><mat-icon>add_shopping_cart</mat-icon><div class="title">{{stockIn}}</div></li>
+        <li  (click)="onClickListItem('SM')" class="side_list_item"><mat-icon>remove_shopping_cart</mat-icon><div class="title">{{stockMovement}}</div></li> -->
+        <mat-divider ></mat-divider>
+        <div  class="main_title">
+          <h3 class="fon">{{taskManagement}}</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li  (click)="onClickListItem('WS')" class="side_list_item"><i class="fas fa-print"></i><div class="title">{{workSpace}}</div></li>
+        <li  (click)="onClickListItem('WS2')" class="side_list_item"><i class="fas fa-print"></i><div class="title">{{workSpace2}}</div></li>
+        <mat-divider ></mat-divider>
+        <div  class="main_title">
+          <h3 class="fon">{{userManagement}}</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li  (click)="onClickListItem('CU')" class="side_list_item"><i class="fas fa-print"></i><div class="title">{{clientUser}}</div></li>
+        <!-- <li (click)="onSignOut()" class="side_list_item"><mat-icon>keyboard_return</mat-icon><div class="title"> {{logout}}</div></li> -->
+        <!-- <mat-divider ></mat-divider>
+        <div  class="main_title">
+          <h3 class="fon">Reports</h3>
+        </div>
+        <mat-divider ></mat-divider>
+        <li  (click)="onClickListItem('FR')" class="side_list_item"><i class="fas fa-print"></i><div class="title">Financial reports</div></li> -->
+        <!-- <li (click)="onSignOut()" class="side_list_item"><mat-icon>keyboard_return</mat-icon><div class="title"> {{logout}}</div></li> -->
+      </ul>
+    </div>
+
+
+    <!-- <div class="lang_container" fxLayoutGap="10px">
+      <h3 class="lang">{{change}}</h3>
+      <button class="toggle_btn2" mat-icon-button [matMenuTriggerFor]="menu2"><mat-icon>language</mat-icon></button>
+<mat-menu #menu2="matMenu">
+  <button  class="toggle_btn" (click)="onChangeLanguage()" mat-menu-item>{{lang}}</button>
+  
+</mat-menu>
+      
+    </div> -->
+
+    <div class="markon_logo">
+      <img src="../../../assets/images/svg/Markon logo-white.png" width="60px" height="60px" alt="">
+      
+    </div>
+
+    <!-- <ul class="side_list">
+      <li class="side_list_item"><a class="side_list_item_link" href="">Home</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Bank</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Forex</a></li>
+      <li class="side_list_item"><a class="side_list_item_link" href="">Journal</a></li>
+    </ul> -->
+  </mat-drawer>
+
+    <mat-drawer-content>
+
+      <mat-toolbar >
+        <div fxLayout fxLayoutGap.xs="10px" class="nav">
+          <div *ngIf="!break" fxFlex fxLayout fxLayoutAlign="flex-start">
+            <button class="toggle_btn" type="button"  mat-icon-button (click)="drawer.toggle(); onToggle()">
+              <i class="fas fa-bars"></i>
+            </button>
+          </div>
+
+          <!-- <div class="middle" fxLayout  fxLayoutGap="20px">
+            <div class="search_container" >
+              <input type="text" matInput class="search">
+              <mat-icon class="search_icon" aria-label="Example home icon">search</mat-icon>
+            </div>
+          </div> -->
+
+         <div  fxFlex fxLayout fxLayoutAlign="flex-end">
+          <button [matMenuTriggerFor]="menu3" mat-icon-button id="sett" class="toggle_btn" aria-label="Example icon-button with heart icon">
+            <mat-icon class="settings">settings</mat-icon>
+          </button>
+          <mat-menu #menu3="matMenu">
+            <button class="icon" (click)="onChangeLanguage()" mat-menu-item>
+              <i class="fas fa-globe"></i>
+              <span class="settingsOtp">{{lang}}</span>
+            </button>
+            <button class="icon" (click)="onClickListItem('BP')" mat-menu-item>
+              <i class="fas fa-user"></i>
+              <span class="settingsOtp">{{profile}}</span>
+            </button>
+            <button class="icon" (click)="onChangePassword()" mat-menu-item>
+              <i class="fas fa-key"></i>
+              <span class="settingsOtp">{{changePassword}}</span>
+            </button>
+            <button class="icon" (click)="onSignOut()" mat-menu-item>
+              <i class="fas fa-sign-out-alt"></i>
+              <span class="settingsOtp">{{logout}}</span>
+            </button>
+            
+            
+            <!-- <ul >
+              <li class="side_list_item2" (click)="onChangeLanguage()" mat-menu-item><mat-icon class="menuIcon">language</mat-icon><div class="title2"> {{lang}}</div></li>
+              <li (click)="onSignOut()" class="side_list_item2" mat-menu-item><mat-icon class="menuIcon">keyboard_return</mat-icon><div class="title2"> {{logout}}</div></li>
+              
+            </ul> -->
+            
+          </mat-menu>
+          
+          <!-- <button class="toggle_btn" mat-icon-button [matMenuTriggerFor]="menu"><mat-icon>perm_identity</mat-icon></button>
+<mat-menu #menu="matMenu">
+  <button (click)="onSignOut()" class="toggle_btn" mat-menu-item>{{logout}}</button>
+  
+</mat-menu> -->
+          <!-- <button mat-icon-button class="toggle_btn" aria-label="Example icon-button with share icon">
+           <mat-icon>perm_identity</mat-icon> -->
+           <!-- <mat-icon>person_outline</mat-icon> -->
+
+         <!-- </button> -->
+         </div>
+        </div>
+      </mat-toolbar>
+
+      <div fxLayout class="actions_box_container">
+        <!-- <div *ngIf="!break" (mouseover)="showButton = true" (mouseleave)="showButton = false" class="hoverableSide">
+          <mat-card class="example-card" *ngIf = "showButton"> -->
+    <!-- <mat-card-title>hello title</mat-card-title> -->
+    <!-- <div class="sideCard"><div class="menu_item">
+      <ul class="side_list" id="myDIV">
+        <li (click)="onClickListItem('H')" fxHide class="side_list_item active"><mat-icon>home</mat-icon><div class="title"> {{home}}</div></li>
+        <li (click)="onClickListItem('BP')" fxHide class="side_list_item"><mat-icon>person</mat-icon><div class="title"> {{businessP}}</div></li>
+        <mat-divider></mat-divider>
+        <div *ngIf="role === '3' || role === '2'" class="main_title">
+          <span class="fon">{{accounting}}</span>
+        </div>
+        <mat-divider *ngIf="role === '3' || role === '2'"></mat-divider>
+        <li *ngIf="role === '3' || role === '2'" (click)="onClickListItem('J')" class="side_list_item"><mat-icon>library_books</mat-icon><div class="title"> {{journal}}</div></li> -->
+        <!-- <li (click)="onClickListItem('JD')" class="side_list_item"><mat-icon>library_books</mat-icon><div class="title"> Journal Dynamic</div></li> -->
+        <!-- <li *ngIf="role === '3' || role === '2'" (click)="onClickListItem('E')" class="side_list_item"><mat-icon> local_atm</mat-icon><div class="title"> {{expense}}</div></li> -->
+        <!-- <li (click)="onClickListItem('PFC')" class="side_list_item"><i class="fas fa-money-bill-wave"></i><div class="title">{{paymentFromCompany}}</div></li> -->
+        <!-- <li (click)="onClickListItem('ED')" class="side_list_item"><mat-icon> local_atm</mat-icon><div class="title">Expense Dynamic</div></li> -->
+        <!-- <mat-divider *ngIf="role === '4' || role === '2'"></mat-divider>
+        <div *ngIf="role === '4' || role === '2'" class="main_title">
+          <h3 class="fon">{{config}}</h3>
+        </div>
+        <mat-divider *ngIf="role === '4' || role === '2'"></mat-divider>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('T')" class="side_list_item"><mat-icon>receipt</mat-icon><div class="title"> {{tax}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('F')" class="side_list_item"><mat-icon> attach_money</mat-icon><div class="title"> {{forex}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('A')" class="side_list_item"><mat-icon>account_box</mat-icon><div class="title"> {{account}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('AC')" class="side_list_item"><mat-icon> vpn_key</mat-icon><div class="title">{{accountConfiguration}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('B')" class="side_list_item"><mat-icon>account_balance</mat-icon><div class="title">{{bank}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('BB')" class="side_list_item"><mat-icon>account_balance</mat-icon><div class="title">{{bankBranch}}</div></li>
+        <li *ngIf="role === '4' || role === '2'" (click)="onClickListItem('BA')" class="side_list_item"><mat-icon> account_balance</mat-icon><div class="title">{{bankAccount}}</div></li>
+        <mat-divider *ngIf="role === '5' || role === '2'"></mat-divider>
+        <div *ngIf="role === '5' || role === '2'" class="main_title">
+          <h3 class="fon">{{sales}}</h3>
+        </div>
+        <mat-divider *ngIf="role === '5' || role === '2'"></mat-divider>
+        <li *ngIf="role === '5' || role === '2'" (click)="onClickListItem('C')" class="side_list_item"><mat-icon>group</mat-icon><div class="title">{{customer}}</div></li>
+        
+        <li *ngIf="role === '5' || role === '2'" (click)="onClickListItem('I')" class="side_list_item"><mat-icon>description</mat-icon><div class="title">{{invoice}}</div></li>
+  
+        <li *ngIf="role === '5' || role === '2'" (click)="onClickListItem('PTC')" class="side_list_item"><i class="fas fa-money-bill-wave"></i><div class="title">{{paymentToCompany}}</div></li>
+        <mat-divider *ngIf="role === '3' || role === '2'"></mat-divider>
+        <div *ngIf="role === '6' || role === '2'" class="main_title">
+          <h3 class="fon">{{inventory}}</h3>
+        </div>
+        <mat-divider *ngIf="role === '6' || role === '2'"></mat-divider>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('P')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{product}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PC')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productCategory}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PG')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productGroup}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PU')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productUnit}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PP')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productPricing}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PS')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productStock}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('PUC')" class="side_list_item"><mat-icon>pages</mat-icon><div class="title">{{productUnitConversion}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('W')" class="side_list_item"><i class="fas fa-warehouse"></i><div class="title">{{warehouse}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('SI')" class="side_list_item"><mat-icon>add_shopping_cart</mat-icon><div class="title">{{stockIn}}</div></li>
+        <li *ngIf="role === '6' || role === '2'" (click)="onClickListItem('SM')" class="side_list_item"><mat-icon>remove_shopping_cart</mat-icon><div class="title">{{stockMovement}}</div></li>
+        <mat-divider *ngIf="role === '7' || role === '2'"></mat-divider>
+        <div *ngIf="role === '7' || role === '2'" class="main_title">
+          <h3 class="fon">Reports</h3>
+        </div>
+        <mat-divider *ngIf="role === '7' || role === '2'"></mat-divider>
+        <li *ngIf="role === '7' || role === '2'" (click)="onClickListItem('FR')" class="side_list_item"><i class="fas fa-print"></i><div class="title">Financial reports</div></li> -->
+        <!-- <li (click)="onSignOut()" class="side_list_item"><mat-icon>keyboard_return</mat-icon><div class="title"> {{logout}}</div></li> -->
+      <!-- </ul>
+    </div></div> -->
+    <!-- <mat-card-actions>
+        <button mat-icon-button ><mat-icon>close</mat-icon></button>
+    </mat-card-actions> -->
+<!-- </mat-card>
+        </div> -->
+        <div class="actions_box">
+          <div [ngSwitch]="navigation">
+            <div *ngSwitchCase="'Home'">
+              <app-system-home></app-system-home>
+            </div>
+            <div *ngSwitchCase="'BusinessProfile'">
+              <app-system-business-profile ></app-system-business-profile>
+            </div>
+            <div *ngSwitchCase="'Tax'">
+              <app-tax ></app-tax>
+            </div>
+            <div *ngSwitchCase="'Account'">
+              <app-account ></app-account>
+            </div>
+            <div *ngSwitchCase="'Forex'">
+              <app-forex ></app-forex>
+            </div>
+            <div *ngSwitchCase="'JournalEntry'">
+              <app-journalentry></app-journalentry>
+            </div>
+            <div *ngSwitchCase="'Expense'">
+              <app-expensefiling></app-expensefiling>
+            </div>
+            <div *ngSwitchCase="'ExpenseDynamic'">
+              <app-expensedynamic></app-expensedynamic>
+            </div>
+            <div *ngSwitchCase="'AccountConfig'">
+              <app-accountconfiguration></app-accountconfiguration>
+            </div>
+            <div *ngSwitchCase="'Customer'">
+              <app-customer></app-customer>
+            </div>
+            <div *ngSwitchCase="'ClientUser'">
+              <app-clientuser></app-clientuser>
+            </div>
+            <div *ngSwitchCase="'Product'">
+              <app-product></app-product>
+            </div>
+            <div *ngSwitchCase="'ProductCat'">
+              <app-productcategory></app-productcategory>
+            </div>
+            <div *ngSwitchCase="'ProductGroup'">
+              <app-productgroup></app-productgroup>
+            </div>
+            <div *ngSwitchCase="'WorkSpace'">
+              <app-workspace></app-workspace>
+            </div>
+            <div *ngSwitchCase="'ProductUnit'">
+              <app-productunit></app-productunit>
+            </div>
+            <div *ngSwitchCase="'ProductUnitCon'">
+              <app-productunitconversion></app-productunitconversion>
+            </div>
+            <div *ngSwitchCase="'WareHouse'">
+              <app-warehouse></app-warehouse>
+            </div>
+            <div *ngSwitchCase="'Bank'">
+              <app-companybank></app-companybank>
+            </div>
+            <div *ngSwitchCase="'BankBranch'">
+              <app-companybankbranch></app-companybankbranch>
+            </div>
+            <div *ngSwitchCase="'BankAccount'">
+              <app-companybankbranchaccount></app-companybankbranchaccount>
+            </div>
+            <div *ngSwitchCase="'Invoice'">
+              <app-invoice></app-invoice>
+            </div>
+            <div *ngSwitchCase="'PaymentFromCompany'">
+              <app-paymentfromcompany></app-paymentfromcompany>
+            </div>
+            <div *ngSwitchCase="'PaymentToCompany'">
+              <app-paymenttocompany></app-paymenttocompany>
+            </div>
+            <div *ngSwitchCase="'ProductPricing'">
+              <app-productpricing></app-productpricing>
+            </div>
+            <div *ngSwitchCase="'StockIn'">
+              <app-stockin></app-stockin>
+            </div>
+            <div *ngSwitchCase="'StockMovement'">
+              <app-stockmovement></app-stockmovement>
+            </div>
+            <div *ngSwitchCase="'JournalDynamic'">
+              <app-journaldynamic></app-journaldynamic>
+            </div>
+            <div *ngSwitchCase="'ProductStock'">
+              <app-productstock></app-productstock>
+            </div>
+            
+            <div *ngSwitchCase="'Boards'">
+              <app-board></app-board>
+            </div>
+            <div *ngSwitchCase="'Template'">
+              <app-board2></app-board2>
+            </div>
+            <div *ngSwitchCase="'BoardState2'">
+              <app-brdstate2></app-brdstate2>
+            </div>
+            <div *ngSwitchCase="'BoardState'">
+              <app-brdstate></app-brdstate>
+            </div>
+            <div *ngSwitchCase="'BarCode'">
+              <app-bar-code></app-bar-code>
+            </div>
+            <div *ngSwitchCase="'FinancialReports'">
+              <app-financial></app-financial>
+            </div>
+            <div *ngSwitchCase="'FinancialReportsPage'">
+              <app-report-page></app-report-page>
+            </div>
+            <div *ngSwitchCase="'Cheque'">
+              <app-chequetocompany></app-chequetocompany>
+            </div>
+            <div *ngSwitchCase="'Charts'">
+              <app-charts></app-charts>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+    </mat-drawer-content>
+
+
+
+</mat-drawer-container>
+

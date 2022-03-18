@@ -1,0 +1,170 @@
+.mat-dialog-container {
+  padding: 0px;
+  margin: 0px;
+}
+
+::ng-deep.mat-form-field-appearance-outline .mat-form-field-infix {
+  padding: 1em 0 1em 0;
+}
+// .cardMain {
+
+// }
+.control {
+  width: 100px;
+  height: 55px;
+  display: flex;
+  /* margin-bottom: 20px; */
+  justify-content: center;
+  align-items: center;
+}
+.matC {
+  width: 100px;
+}
+.alaa {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.matD {
+  width: 155px;
+}
+.matR {
+  width: 170px;
+}
+
+// .inp {
+//   font-size: 20px !important;
+// }
+.cancel_Img {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+.cancel_Img {
+  width: 14px;
+  height: 14px;
+  cursor: pointer;
+}
+.BtnS {
+  outline: none;
+  border: none;
+  width: 100px;
+  color: white;
+  background: #20bf6b;
+}
+.BtnC {
+  outline: none;
+  border: none;
+  width: 100px;
+
+  background: #e9e9e9;
+  color: black;
+}
+
+.btn-container {
+  width: 100%;
+  display: flex;
+  margin-top: 12px;
+
+  justify-content: flex-end;
+}
+.cheBot {
+  margin-bottom: 10px;
+}
+.bigMain {
+  width: 100%;
+  padding: 0 0 0 15px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.fontY {
+  font-size: 30px !important;
+
+  font-weight: lighter;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+
+.description {
+  width: 100%;
+}
+.add_btn {
+  background: #20bf6b;
+  outline: none;
+  border: none;
+  margin: 10px 8px;
+
+  color: white;
+}
+
+.cen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.add_section {
+  margin-top: 20px;
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.add_section::-webkit-scrollbar {
+  width: 5px;
+}
+.add_section::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #737272;
+  border: 1px solid #737272;
+}
+
+.accordion {
+  background: #ecf0f1;
+  margin-bottom: 7px !important;
+}
+
+// .matAcc {
+//   margin-bottom: 7px;
+// }
+
+.cardForm {
+  margin: 10px;
+  width: 100%;
+}
+.cardForm .mat-form-field {
+  padding: 5px;
+}
+
+.cardcard {
+  margin-bottom: 5px;
+}
+
+.firstline {
+  display: flex;
+  flex-direction: row;
+}
+
+.Btn {
+  outline: none;
+  border: none;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+@media (max-width: 960px) {
+  .add_section {
+    margin-top: 20px;
+    width: 100%;
+    height: 150px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+}

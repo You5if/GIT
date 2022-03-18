@@ -1,0 +1,14 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Loading Plan No.
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Loading Plan No." name="loadingPlanNo" [(ngModel)]="loadingPlanNo" (input)="onLoadingPlanNo()">
+      </mat-form-field>
+    </form>
+  </ng-template>
+</mat-expansion-panel>

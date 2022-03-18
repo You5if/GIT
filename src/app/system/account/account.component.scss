@@ -1,0 +1,188 @@
+::ng-deep.custom-dialog > .mat-dialog-container {
+  background: white;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
+.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: white;
+  background: gray;
+}
+::ng-deep .mat-checkbox-layout {
+  background: #ffffff;
+}
+
+.sec {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 15px;
+}
+.centH {
+  display: flex;
+  font-size: 18px !important;
+  font-weight: bolder;
+  justify-content: center;
+  color: #ffffff;
+  align-items: center;
+}
+.cbPad {
+  padding-left: 35px;
+  margin-top: 7px;
+}
+
+.paginator {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.headerRow {
+  top: 0px;
+  position: sticky;
+  background: #34495e;
+  color: #ffffff;
+  z-index: 1;
+}
+
+.index_row {
+  display: flex;
+  flex-direction: row;
+  justify-items: center;
+}
+.cent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cent2 {
+  margin-top: 7px;
+}
+.fontY {
+  font-size: 35px !important;
+
+  font-weight: lighter;
+}
+.active {
+  background: #f1f2f6;
+}
+.Btn {
+  outline: none;
+  border: none;
+}
+.add_btn {
+  background: #20bf6b;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+mat-row.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+.add_btnS {
+  background: #1db954;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btnW {
+  background: #128c7e;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btnG {
+  background: #78e08f;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btn2 {
+  background: #2ecc71;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btn3 {
+  background: #27ae60;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btn4 {
+  background: #05c46b;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+.add_btn5 {
+  background: #3ae374;
+
+  outline: none;
+  border: none;
+  color: white;
+}
+
+.toolbar {
+  background: white;
+}
+// .toolSection {
+//   // margin-top: 50px;
+// }
+.toolSection {
+  height: 390px;
+  overflow: hidden;
+  overflow-y: scroll;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.toolSection::-webkit-scrollbar {
+  width: 3px;
+}
+.toolSection::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+
+  background-color: #e9e9e9;
+}
+.cards_section {
+  background-color: lightgrey;
+  margin-top: 50px;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+  width: 100%;
+}
+@media (max-width: 600px) {
+  .add_btn {
+    background: #20bf6b;
+
+    outline: none;
+    width: 100% !important;
+    border: none;
+    color: white;
+  }
+}
+@media (min-height: 800px) {
+  .toolSection {
+    height: 500px;
+    overflow: hidden;
+    overflow-y: scroll;
+  }
+  .toolSection::-webkit-scrollbar {
+    width: 3px;
+  }
+  .toolSection::-webkit-scrollbar-thumb {
+    border-radius: 50px;
+
+    background-color: #e9e9e9;
+  }
+}

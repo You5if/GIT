@@ -1,0 +1,14 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Plan Invoice
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form>
+      <mat-form-field>
+        <input matInput type="text" placeholder="Plan Invoice" name="planInvoiceNo" [(ngModel)]="planInvoiceNo" (input)="onplanInvoiceNo()">
+      </mat-form-field>
+    </form>
+  </ng-template>
+</mat-expansion-panel>

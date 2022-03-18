@@ -1,0 +1,60 @@
+<!-- <mat-toolbar>
+  <mat-icon class="add" (click)="onAdd()">add_circle</mat-icon>
+  <h1>Brands</h1>
+</mat-toolbar>
+
+
+<mat-grid-list [cols]="breakpoint" (window:resize)="onResize($event)" [gutterSize]="'0.5'">
+  <mat-grid-tile *ngFor="let record of dataList">
+      <mat-card class="mat-elevation-z8">
+          <mat-card-title>
+              {{ record.carMake }}
+          </mat-card-title>
+          <mat-card-actions>
+            <mat-icon [matMenuTriggerFor]="menu" class="options">more_vert</mat-icon>
+          </mat-card-actions>
+      </mat-card>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="onView(record.sdCarMakeId)" [disabled]="!screenRights.viewFlag">
+        View Brand
+        </button>
+
+        <button mat-menu-item (click)="onEdit(record.sdCarMakeId)" [disabled]="!screenRights.editFlag">
+        Edit Brand
+        </button>
+
+      </mat-menu>
+  </mat-grid-tile>
+
+</mat-grid-list> -->
+
+<mat-toolbar>
+  <button mat-mini-fab (click)="onAdd()">
+    <mat-icon>add</mat-icon>
+  </button>
+  <h1>Brands</h1>
+  <span></span>
+</mat-toolbar>
+
+<div *ngFor="let record of dataList">
+  <mat-card class="mat-elevation-z0">
+    <mat-card-header (click)="onView(record.sdCarMakeId)">
+      <mat-card-title>{{ record.carMake }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-actions>
+      <mat-icon [matMenuTriggerFor]="menu" class="options">more_vert</mat-icon>
+    </mat-card-actions>
+  </mat-card>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onEdit(record.sdCarMakeId)" [disabled]="!screenRights.editFlag">
+      <mat-icon>edit</mat-icon>Edit Brand
+    </button>
+    <button mat-menu-item (click)="onDelete(record.sdCarMakeId)" *ngIf="role === '1'">
+      <mat-icon color="warn">delete</mat-icon>Delete
+    </button>
+  </mat-menu>
+</div>
+
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>

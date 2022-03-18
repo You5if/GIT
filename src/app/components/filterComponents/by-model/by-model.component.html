@@ -1,0 +1,21 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Model
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form>
+      <mat-form-field>
+        <input [formControl]="modelAC" type="text" maxlength="100" matInput
+        [matAutocomplete]="modelACC" (input)="onModelChange(modelAC.value)">
+        <mat-autocomplete #modelACC="matAutocomplete">
+        <mat-option *ngFor="let selectModel of filteredModel | async; let index = index"
+        [value]="selectModel.name" (onSelectionChange)="onModelSelect(selectModel.name)">
+        {{selectModel.name}}
+        </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+    </form>
+  </ng-template>
+</mat-expansion-panel>

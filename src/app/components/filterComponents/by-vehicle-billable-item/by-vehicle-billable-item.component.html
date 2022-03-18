@@ -1,0 +1,19 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Vehicle Billable Item
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+      <form [formGroup]="vehicleBillableItemFilter">
+          <mat-form-field>
+                <mat-label>Vehicle Billable Item</mat-label>
+                <mat-select multiple formControlName="vehicleBillableItem">
+                    <mat-option value="Towing">Towing</mat-option>
+                    <mat-option value="Parts">Parts</mat-option>
+                    <mat-option value="Others">Others</mat-option>
+                </mat-select>
+          </mat-form-field>
+      </form>
+  </ng-template>
+</mat-expansion-panel>

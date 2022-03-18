@@ -1,0 +1,175 @@
+<div class="header">
+  <h1 mat-dialog-title>{{dialog_title}} Vehicle</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+
+<div mat-dialog-content class="wrapper">
+  <form #sdvehicledetailForm="ngForm">
+
+    <mat-form-field *ngIf="role !== '4'" class="md-bottom" appearance="outline"
+      [hideRequiredMarker]="options.value.hideRequired" [floatLabel]="options.value.floatLabel">
+      <mat-label>VIN</mat-label>
+      <input matInput placeholder="N/A" name="vin" maxlength="100" [(ngModel)]="pModel.vin">
+    </mat-form-field>
+
+    <div class="md-1" *ngIf="role !== '4'">
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="vehicleTypeId" placeholder="Vehicle Type" [(ngModel)]="pModel.vehicleTypeId">
+          <mat-option *ngFor="let item of vehicleTypes" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Color</mat-label>
+        <input matInput placeholder="Vehicle Color" name="vehicleColor" [(ngModel)]="pModel.vehicleColor">
+      </mat-form-field>
+
+
+
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="runConditionId" placeholder="Run Condition"
+          [(ngModel)]="pModel.runConditionId">
+          <mat-option *ngFor="let item of runConditions" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-divider></mat-divider>
+
+    <div class="md-2" *ngIf="role !== '4'">
+      <mat-form-field appearance="outline">
+        <mat-select name="year" placeholder="Year" [(ngModel)]="pModel.year">
+          <mat-option *ngFor="let selectModel of years" [value]="selectModel">{{selectModel}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-icon style="cursor: pointer;" (click)="onMakeAdd()">add</mat-icon>
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="sdCarMakeId" placeholder="Make" [(ngModel)]="pModel.sdCarMakeId"
+          (selectionChange)="onMakeChange()">
+          <mat-option *ngFor="let item of carMakes" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-icon style="cursor: pointer;" (click)="onModelAdd()">add</mat-icon>
+      <mat-form-field appearance="outline">
+        <mat-select matNativeControl name="sdCarModelId" placeholder="Model" [(ngModel)]="pModel.sdCarModelId">
+          <mat-option *ngFor="let item of carModels" [value]="item.id">{{item.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="md-3">
+
+      <mat-form-field appearance="outline" *ngIf="role !== '4'">
+        <mat-select matNativeControl name="sdCityId" placeholder="Location" [(ngModel)]="pModel.sdCityId">
+          <mat-option *ngFor="let item of cityTypes" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="role !== '4'">
+        <mat-label>Remarks</mat-label>
+        <input matInput name="remarks" type="text" [(ngModel)]="pModel.remarks" [readonly]="pModel.readOnly" required
+          (input)="onRemarks()">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" *ngIf="role === '4' || role === '2'">
+        <mat-label>Customer Remarks</mat-label>
+        <input matInput name="customerremarks" type="text" [(ngModel)]="pModel.customerRemarks"
+          [readonly]="role === '2'" required (input)="onCustomerRemarks()">
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="checkBox" *ngIf="role !== '4'">
+      <div class="checkBox-1">
+        <mat-checkbox name="isTerminal" [(ngModel)]="pModel.wideLoad">Wide Load</mat-checkbox>
+      </div>
+      <div class="checkBox-2">
+        <mat-checkbox name="keysAvailable" [(ngModel)]="pModel.keysAvailable">Keys Available</mat-checkbox>
+      </div>
+      <div class="checkBox-3">
+        <mat-checkbox name="titleAvailable" [(ngModel)]="pModel.titleAvailable">Title Available</mat-checkbox>
+      </div>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="md-4" *ngIf="role !== '4'">
+      <mat-form-field appearance="outline" [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <mat-label>Lot No.</mat-label>
+        <input matInput placeholder="N/A" name="lotNumber" [(ngModel)]="pModel.lotNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <mat-label>License Plate</mat-label>
+        <input matInput placeholder="N/A" name="licensePlate" [(ngModel)]="pModel.licensePlate">
+      </mat-form-field>
+    </div>
+
+    <mat-divider></mat-divider>
+
+    <div class="md-5" *ngIf="role !== '4'">
+      <mat-form-field appearance="outline">
+        <mat-label>Customer</mat-label>
+        <mat-select matNativeControl name="sdCompanyId" [(ngModel)]="pModel.sdCompanyId" [disabled]="pModel.readOnly">
+          <mat-option *ngFor="let item of companyTypes" [value]="item.id">
+            {{item.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <mat-label>Car Tag</mat-label>
+        <input matInput placeholder="N/A" name="cartag" [(ngModel)]="pModel.carTagNumber">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="md-bottom" [hideRequiredMarker]="options.value.hideRequired"
+        [floatLabel]="options.value.floatLabel">
+        <mat-label>Additonal Info</mat-label>
+        <textarea rows="4" cols="50" matInput placeholder="N/A" maxlength="100" name="additionalInformation"
+          #additionalInformationInput="ngModel" [(ngModel)]="pModel.additionalInformation"></textarea>
+        <mat-error *ngIf="additionalInformationInput.hasError('required')">Additional Information cannot be blank!
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+
+    <mat-divider></mat-divider>
+
+    <div class="md-6" *ngIf="role !== '4'">
+      <mat-form-field class="md-bottom" appearance="outline">
+        <mat-label>Received On</mat-label>
+        <input matInput name="receivedOn" [matDatepicker]="receivedOn" [(ngModel)]="pModel.receivedOn"
+          [readonly]="pModel.readOnly" required>
+        <mat-datepicker-toggle matSuffix [for]="receivedOn"></mat-datepicker-toggle>
+        <mat-datepicker #receivedOn></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Received By</mat-label>
+        <mat-select matNativeControl name="receivedBy" [(ngModel)]="pModel.receivedBy">
+          <mat-option *ngFor="let user of usersList" [value]="user.id">
+            {{user.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+  </form>
+</div>
+<div mat-dialog-actions class="cta">
+  <div></div>
+  <button *ngIf="pModel.entryMode=='D'" mat-raised-button [disabled]="sdvehicledetailForm.invalid" type="submit"
+    color="warn" (click)="onSubmit(sdvehicledetailForm.value)">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button
+    [disabled]="sdvehicledetailForm.invalid" (click)="onSubmit(sdvehicledetailForm.value)" type="button"
+    color="accent">Submit</button>
+</div>

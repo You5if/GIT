@@ -1,0 +1,27 @@
+<div class="header">
+  <h1 mat-dialog-title>Add Vehicle</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+<div mat-dialog-content class="wrapper">
+  <form #f="ngForm">
+    <mat-form-field class="md-bottom" appearance="outline" *ngIf="singleVisible" [hideRequiredMarker]="options.value.hideRequired" [floatLabel]="options.value.floatLabel">
+      <mat-label>VIN</mat-label>
+      <input matInput placeholder="N/A" name="vin" maxlength="100" [(ngModel)]="pModel.vin">
+    </mat-form-field>
+
+
+
+    <mat-divider></mat-divider>
+
+    <app-upload [myFiles]="lFiles" (onUploadFinished)="uploadFinished($event)"
+                (onDeleteFile)="deleteFile($event)">
+    </app-upload>
+
+
+
+  </form>
+</div>
+<div class="cta" mat-dialog-actions>
+  <div></div>
+  <button mat-raised-button [disabled]="f.invalid" type="button" (click)="onSubmit(f.value)" color="accent">Submit</button>
+</div>

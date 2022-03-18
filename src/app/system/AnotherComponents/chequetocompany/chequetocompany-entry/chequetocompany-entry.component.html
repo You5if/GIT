@@ -1,0 +1,35 @@
+<form #chequetocompanyForm="ngForm" (ngSubmit)="onSubmit(chequetocompanyForm.value)">
+  <mat-card class="cardMain">
+    <mat-card-title>{{dialog_title}}</mat-card-title>
+    <mat-card-content fxLayoutWrap fxLayoutGap="10px">
+      <section fxLayout="column" fxLayoutGap.gt-md="20px" fxLayoutAlign="center top">
+                  <mat-list fxLayout="row" fxLayoutGap.gt-md="15px">
+                      <!-- Fields come here -->
+
+          <mat-list-item>            <mat-form-field>              <input matInput name="chequeNumber" placeholder="chequeNumber" type="text" [(ngModel)] = "pModel.chequeNumber" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="chequeType" placeholder="chequeType" type="number" [(ngModel)] = "pModel.chequeType" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="currency" placeholder="currency" type="number" [(ngModel)] = "pModel.currency" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="amount" placeholder="amount" type="number" [(ngModel)] = "pModel.amount" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="fromCheque" placeholder="fromCheque" type="number" [(ngModel)] = "pModel.fromCheque" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="toCheque" placeholder="toCheque" type="number" [(ngModel)] = "pModel.toCheque" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="bankListId" placeholder="bankListId" type="number" [(ngModel)] = "pModel.bankListId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="chequeName" placeholder="chequeName" type="text" [(ngModel)] = "pModel.chequeName" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="description" placeholder="description" type="text" [(ngModel)] = "pModel.description" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="companyBankBranchAccountId" placeholder="companyBankBranchAccountId" type="number" [(ngModel)] = "pModel.companyBankBranchAccountId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="dueDate" [matDatepicker]="dueDate" placeholder="dueDate" [(ngModel)] = "pModel.dueDate" [readonly]= "pModel.readOnly" required >               <mat-datepicker-toggle matSuffix [for]="dueDate"></mat-datepicker-toggle>              <mat-datepicker #dueDate></mat-datepicker>            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="customerId" placeholder="customerId" type="number" [(ngModel)] = "pModel.customerId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="customerAccountId" placeholder="customerAccountId" type="number" [(ngModel)] = "pModel.customerAccountId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+          <mat-list-item>            <mat-form-field>              <input matInput name="paymentToCompanyId" placeholder="paymentToCompanyId" type="number" [(ngModel)] = "pModel.paymentToCompanyId" [readonly]= "pModel.readOnly" required >            </mat-form-field>          </mat-list-item>
+
+                      <!-- Fields come here -->
+                  </mat-list>
+              </section>
+    </mat-card-content>
+<mat-card-actions style="text-align: center">
+                    <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button color="success" [disabled]="chequetocompanyForm.invalid"
+                      type="submit">Submit</button>
+                    <button *ngIf="pModel.entryMode=='D'" mat-raised-button color="warn" [disabled]="chequetocompanyForm.invalid" type="submit">Delete</button>
+                    <button mat-raised-button type="button" color="warn" (click)="onCancel()">Cancel</button>
+</mat-card-actions>
+  </mat-card>
+</form>

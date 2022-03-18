@@ -1,0 +1,19 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+    <mat-expansion-panel-header>
+        <mat-panel-title>
+            Brand
+        </mat-panel-title>
+    </mat-expansion-panel-header>
+    <ng-template matExpansionPanelContent>
+      <mat-form-field>
+        <input [formControl]="brandAC" type="text" maxlength="100" matInput
+        [matAutocomplete]="brandACC" (input)="onBrandChange(brandAC.value)">
+        <mat-autocomplete #brandACC="matAutocomplete">
+        <mat-option *ngFor="let selectModel of filteredBrand | async; let index = index"
+        [value]="selectModel.name" (onSelectionChange)="onBrandSelect(selectModel.name)">
+        {{selectModel.name}}
+        </mat-option>
+        </mat-autocomplete>
+        </mat-form-field>
+    </ng-template>
+</mat-expansion-panel>

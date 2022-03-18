@@ -1,0 +1,29 @@
+<mat-expansion-panel class="mat-elevation-z0" (click)="$event.stopPropagation()">
+  <mat-expansion-panel-header>
+      <mat-panel-title>
+          Year
+      </mat-panel-title>
+  </mat-expansion-panel-header>
+  <ng-template matExpansionPanelContent>
+    <form [formGroup]="yearFilter">
+        <mat-form-field>
+            <mat-label>From</mat-label>
+            <mat-select formControlName="from" (selectionChange)="onFromChange()">
+              <mat-option *ngFor="let selectModel of years" [value]="selectModel">
+                {{selectModel}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    
+        <mat-form-field>
+            <mat-label>To</mat-label>
+            <mat-select formControlName="to" (selectionChange)="onToChange()">
+              <mat-option *ngFor="let selectModel of years2" [value]="selectModel">
+                {{selectModel}}
+              </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </form>
+  </ng-template>
+</mat-expansion-panel>
+

@@ -1,0 +1,329 @@
+<mat-toolbar class="topBar">
+  <span>Vehicles</span>
+  <div></div>
+  <div>
+    <button *ngIf="(role === '3' || role === '1' || role === '2')" mat-mini-fab (click)="openBatchEntry()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>
+<mat-paginator [length]="totalRecords" [pageSize]="recordsPerPage" [pageSizeOptions]="pageSizeOptions"
+  (page)="paginatoryOperation($event)" showFirstLastButtons>
+</mat-paginator>
+
+<mat-menu style="width: 100vw; padding: 2em; text-align: center;" class="mobFilter" #filters="matMenu">
+  <filter></filter>
+</mat-menu>
+
+<main>
+  <section class="hideOnMob">
+    <filter *ngIf="role !== '3'"></filter>
+  </section>
+
+  <section class="container">
+    <!-- <button mat-mini-fab type="button" (click)="pleaseFocus()">
+      <mat-icon>filter_list</mat-icon>
+    </button> -->
+    <div #formRow *ngFor="let record of dataList">
+      <mat-card class="mat-elevation-z0">
+        <mat-card-header>
+          <!-- <mat-icon [matMenuTriggerFor]="options">more_vert</mat-icon> -->
+          <mat-checkbox *ngIf="role !== '3'" [(ngModel)]="record.sdVehicleDetailPicIndex[0].vehicleSelected"
+            (change)="getIDs(record.sdVehicleDetailId, record.sdVehicleDetailPicIndex[0].vehicleSelected)"
+            [ngClass]="{'hidden': !record.sdVehicleDetailPicIndex[0].cardSelectable}"
+            style="position: absolute; top: 2em; right: 2em;"></mat-checkbox>
+          <mat-card-title>{{ record.carModel }}</mat-card-title>
+          <mat-card-subtitle><b>{{ record.vin }}</b></mat-card-subtitle>
+        </mat-card-header>
+        <button mat-mini-fab class="add_image_icon" (click)="onAddPic(record.sdVehicleDetailId)">
+          <mat-icon>insert_photo</mat-icon>
+        </button>
+
+        <button *ngIf="role === '1'" mat-mini-fab color="warn" (click)="onDeleteVehicle(record.sdVehicleDetailId)">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <div [id]="'a'+record.sdVehicleDetailId" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-item" *ngFor="let image of record.sdVehicleDetailPicIndex let i = index;"
+              [ngClass]="{'active': i === 0}">
+              <img mat-card-image [src]="image.apiImagePath">
+            </div>
+          </div>
+          <a class="carousel-control-prev" [href]="'#a' + record.sdVehicleDetailId" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" [href]="'#a' + record.sdVehicleDetailId" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
+        </div>
+        <mat-card-content *ngIf="role !== '3'">
+          <mat-accordion>
+            <mat-expansion-panel class="mat-elevation-z0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Vehicle Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <section>
+                <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onEdit(record.sdVehicleDetailId)">edit</mat-icon>
+                <div>
+                  <span>VIN</span>
+                  <span>{{ record.vin }}</span>
+                </div>
+                <div>
+                  <span>Company </span>
+                  <span>{{ record.company }}</span>
+                </div>
+                <div>
+                  <span>Year</span>
+                  <span>{{ record.year }}</span>
+                </div>
+                <div>
+                  <span>Brand</span>
+                  <span>{{ record.carMake }}</span>
+                </div>
+                <div>
+                  <span>Model</span>
+                  <span>{{ record.carModel }}</span>
+                </div>
+                <div>
+                  <span>Type</span>
+                  <span>{{ record.vehicleType }}</span>
+                </div>
+                <div>
+                  <span>Color</span>
+                  <span>{{ record.vehicleColor }}</span>
+                </div>
+                <div>
+                  <span>Lot No.</span>
+                  <span>{{ record.lotNumber }}</span>
+                </div>
+                <div>
+                  <span>Location</span>
+                  <span>{{ record.location }}</span>
+                </div>
+                <div>
+                  <span>Additional Info</span>
+                  <span>{{ record.additionalInformation }}</span>
+                </div>
+                <div>
+                  <span>Car Tag No.</span>
+                  <span>{{ record.carTagNumber }}</span>
+                </div>
+                <div>
+                  <span>Dispatch Status</span>
+                  <span>{{ record.dispatchStatus }}</span>
+                </div>
+              </section>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Plan Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <section>
+                <mat-icon style="float: right; cursor: pointer;" color="warn"
+                  (click)="onDeletePlan(record.sdDispatchPlanId)" *ngIf="role === '1'">delete</mat-icon>
+                <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onPlanReport(record.sdDispatchPlanId)">receipt</mat-icon>
+                <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onEditPlan(record.sdDispatchPlanId)">edit</mat-icon>
+                <div>
+                  <span>Plan Code</span>
+                  <span>{{ record.planCode }}</span>
+                </div>
+                <div>
+                  <span>Description</span>
+                  <span>{{ record.description }}</span>
+                </div>
+                <div>
+                  <span>Customer Name</span>
+                  <span>{{ record.customerName }}</span>
+                </div>
+                <div>
+                  <span>Shipping Company</span>
+                  <span>{{ record.shippingCompany }}</span>
+                </div>
+                <div>
+                  <span>Booking No.</span>
+                  <span>{{ record.bookingNumber }}</span>
+                </div>
+                <div>
+                  <span>Booking URL</span>
+                  <span>{{ record.bookingNumberURL }}</span>
+                </div>
+                <div>
+                  <span>Container No</span>
+                  <span>{{ record.containerNumber }}</span>
+                </div>
+                <div>
+                  <span>Loading Plan No.</span>
+                  <span>{{ record.loadingPlanNumber }}</span>
+                </div>
+                <div>
+                  <span>Consignee</span>
+                  <span>{{ record.consignee }}</span>
+                </div>
+                <div>
+                  <span>Dispatch Date</span>
+                  <span>{{ record.dispatchDate | date }}</span>
+                </div>
+                <div>
+                  <span>Plan Status</span>
+                  <span>{{ record.planStatus }}</span>
+                </div>
+              </section>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Expense Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                (click)="onAddExpense(record.sdVehicleDetailId)">add</mat-icon>
+              <h3>Vehicle Expenses</h3>
+              <section *ngFor="let expense of record.vehicleExpenseIndex">
+                <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                  (click)="onEditExpense(expense.sdDispatchPlanExpenseId)">edit</mat-icon>
+                <mat-icon *ngIf="role !== '1'" style="float: right; cursor: pointer;" color="warn"
+                  (click)="onDeleteExpense(expense.sdDispatchPlanExpenseId)">delete</mat-icon>
+                <div>
+                  <span>Expense Date</span>
+                  <span>{{ expense.expenseDate | date }}</span>
+                </div>
+                <div>
+                  <span>Billable Item</span>
+                  <span>{{ expense.billableItem }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Supplier</span>
+                  <span>{{ expense.description }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Reference No.</span>
+                  <span>{{ expense.referenceNumber }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Cost Price</span>
+                  <span>{{ expense.costPrice | currency }}</span>
+                </div>
+                <div>
+                  <span>Selling</span>
+                  <span>{{ expense.amount | currency }}</span>
+                </div>
+              </section>
+              <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                (click)="onAddPlanExpense(record.sdDispatchPlanId)">add</mat-icon>
+              <h3>Plan Expenses</h3>
+              <section *ngFor="let expense of record.vehiclePlanExpenseIndex">
+                <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                  (click)="onEditExpense(expense.sdDispatchPlanExpenseId)">edit</mat-icon>
+                <mat-icon *ngIf="role !== '1'" style="float: right; cursor: pointer;" color="warn"
+                  (click)="onDeleteExpense(expense.sdDispatchPlanExpenseId)">delete</mat-icon>
+                <div>
+                  <span>Expense Date</span>
+                  <span>{{ expense.expenseDate | date }}</span>
+                </div>
+                <div>
+                  <span>Billable Item</span>
+                  <span>{{ expense.billableItem }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Supplier</span>
+                  <span>{{ expense.description }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Reference No.</span>
+                  <span>{{ expense.referenceNumber }}</span>
+                </div>
+                <div *ngIf="role !== '4'">
+                  <span>Cost Price</span>
+                  <span>{{ expense.costPrice | currency }}</span>
+                </div>
+                <div>
+                  <span>Selling</span>
+                  <span>{{ expense.amount | currency }}</span>
+                </div>
+              </section>
+              <h3 *ngIf="role !== '4'">Invoice</h3>
+              <section *ngIf="role !== '4'">
+                <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onInvoiceReport2(record.sdDispatchPlanInvoiceId)">payment</mat-icon>
+                  <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onInvoiceEmailReport2(record.sdDispatchPlanInvoiceId)">email</mat-icon>
+                <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onInvoiceReport(record.sdDispatchPlanInvoiceId)">receipt</mat-icon>
+                  <mat-icon style="float: right; cursor: pointer;" color="accent"
+                  (click)="onInvoiceEmailReport(record.sdDispatchPlanInvoiceId)">email</mat-icon>
+                <div>
+                  <span>No.</span>
+                  <span>{{ record.invoiceNumber }}</span>
+                </div>
+                <div>
+                  <span>Total Amount</span>
+                  <span>{{ record.invoiceTotalAmount | currency }}</span>
+                </div>
+              </section>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z0">
+              <mat-expansion-panel-header>
+                <mat-panel-title>Payment Details</mat-panel-title>
+              </mat-expansion-panel-header>
+              <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                (click)="onAddPayment(record.sdDispatchPlanInvoiceId)">add</mat-icon>
+              <br><br>
+              <section *ngFor="let payment of record.vehiclePlanPayment" style="margin-top: 0.5em;">
+                <mat-icon *ngIf="role !== '4'" style="float: right; cursor: pointer;" color="accent"
+                  (click)="onEditPayment(payment.sdDispatchPlanPaymentId)">edit</mat-icon>
+                <mat-icon *ngIf="role === '1'" style="float: right; cursor: pointer;" color="warn"
+                  (click)="onDeletePayment(payment.sdDispatchPlanPaymentId)">delete</mat-icon>
+                <div>
+                  <span>Date</span>
+                  <span>{{ payment.paymentDate | date }}</span>
+                </div>
+                <div>
+                  <span>Type</span>
+                  <span>{{ payment.paymentType }}</span>
+                </div>
+                <div>
+                  <span>Reference</span>
+                  <span>{{ payment.reference }}</span>
+                </div>
+                <div>
+                  <span>Memo</span>
+                  <span>{{ payment.memo }}</span>
+                </div>
+                <div>
+                  <span>Amount</span>
+                  <span>{{ payment.paymentAmount | currency }}</span>
+                </div>
+              </section>
+            </mat-expansion-panel>
+          </mat-accordion>
+        </mat-card-content>
+        <mat-card-actions>
+        </mat-card-actions>
+      </mat-card>
+
+
+    </div>
+
+  </section>
+</main>
+
+<mat-toolbar style="position: fixed; bottom: 0; opacity: 0.9;" *ngIf="role !== '3'">
+  <button mat-mini-fab [matBadge]="cardCount" matBadgeColor="warn" [matMenuTriggerFor]="addToPlan">
+    <mat-icon>library_add</mat-icon>
+  </button>
+  <span style="flex: 1 1 auto"></span>
+  <button mat-mini-fab [matMenuTriggerFor]="filters" (click)="$event.stopPropagation()" class="hideOnDesk">
+    <mat-icon>filter_list</mat-icon>
+  </button>
+</mat-toolbar>
+<mat-menu #addToPlan="matMenu">
+  <button mat-menu-item (click)="onAddVehiclesToBatch()">
+    <mat-icon style="color: rgb(36, 180, 0);">add_circle</mat-icon>&nbsp;Exisitng Plan
+  </button>
+  <button mat-menu-item (click)="onAddVehicleToCreate()">
+    <mat-icon color="accent">add_circle</mat-icon>&nbsp;Create Plan
+  </button>
+</mat-menu>

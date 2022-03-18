@@ -1,0 +1,61 @@
+.board {
+  width: 200px;
+  height: 100px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-right: 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: lightgray;
+}
+
+.mainRow {
+  display: -webkit-inline-box;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  overflow-x: scroll;
+}
+.mainRow::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+.mainRow::-webkit-scrollbar-thumb {
+  border-radius: 50px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #ffff;
+  border: 1px solid #ffff;
+}
+
+.boardName {
+  margin-left: 20px;
+  margin-top: 15px;
+  font-weight: bolder;
+}
+
+.head {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  margin-left: 30px;
+  align-items: flex-start;
+}
+.headText {
+  margin-left: 30px;
+  font-weight: bolder;
+}
+
+.bigMain {
+  flex-direction: row;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cancel_Img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}

@@ -1,0 +1,164 @@
+<div *ngIf="isLoggedIn()">
+<mat-toolbar mat-elevation-z2>
+    <!-- First toolbar -->
+    <mat-toolbar-row [class.mat-elevation-z2]="true">
+        <!-- side navigation -->
+        <div fxShow="true" fxHide.gt-sm="true">
+          <button mat-icon-button (click)="sidenav.toggle()">
+            <mat-icon>menu</mat-icon>
+          </button>
+        </div>
+        <!-- Company Logo -->
+        <div>
+            <button mat-button routerLink="/">
+                <mat-icon class="mat-icon-logo" svgIcon="logo"></mat-icon>
+            </button>
+
+        </div>
+
+        <!-- Right Side Menus -->
+        <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
+            <span>
+                <button mat-icon-button>
+                    <mat-icon>search</mat-icon>
+                </button>
+                <button mat-icon-button [matMenuTriggerFor]="notificationsmenu">
+                    <mat-icon>notifications</mat-icon>
+                </button>
+                <mat-menu #notificationsmenu="matMenu">
+                    <button mat-menu-item>
+                        <mat-icon>shopping_cart</mat-icon>Orders received
+                    </button>
+                    <button *ngIf="pShowUserNav" mat-menu-item>
+                        <mat-icon>mail</mat-icon>Mail
+                    </button>
+                    <button *ngIf="pShowUserNav" mat-menu-item>
+                        <mat-icon>message</mat-icon>Message
+                    </button>
+                </mat-menu>
+            </span>
+            <span>
+                <button mat-button [matMenuTriggerFor]="usermenu">
+                    <mat-icon>account_circle</mat-icon> {{ getUserName() }}
+                </button>
+                <mat-menu #usermenu="matMenu">
+                    <button mat-menu-item [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+                        <mat-icon>dashboard</mat-icon>Dashboard
+                    </button>
+                    <button *ngIf="pShowUserNav" mat-menu-item>
+                        <mat-icon>person</mat-icon>Profile
+                    </button>
+                    <button *ngIf="pShowUserNav" mat-menu-item>
+                        <mat-icon>settings</mat-icon>Setting
+                    </button>
+                    <button *ngIf="pShowUserNav" mat-menu-item [routerLink]="['/changepassword']" routerLinkActive="router-link-active">
+                        <mat-icon>lock</mat-icon>Change Password
+                    </button>
+                    <button mat-menu-item (click)="onSignOut()">
+                        <mat-icon>power_settings_new</mat-icon>Sign Out
+                    </button>
+                </mat-menu>
+            </span>
+            <div *ngIf="pShowUserNav">
+                <span *ngFor="let item of navItems">
+                    <!-- Handle branch node buttons here -->
+                    <span *ngIf="item.isParent">
+                        <button mat-button [matMenuTriggerFor]="menu.childMenu" [disabled]="item.disabled" >
+                            {{item.displayName}}
+                        </button>
+                        <app-menu-item #menu [items]="item.children"></app-menu-item>
+                    </span>
+                    <!-- Leaf node buttons here -->
+                    <span *ngIf="!item.isParent">
+                        <button mat-button color="White" [routerLink]="item.routeName" >
+                            {{item.displayName}}
+                        </button>
+                    </span>
+                </span>
+            </div>
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>
+<mat-sidenav-container  class="example-container">
+
+  <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+    <!-- Company Logo -->
+    <div>
+        <button mat-button routerLink="/">
+            <mat-icon class="mat-icon-logo" svgIcon="logo"></mat-icon>
+        </button>
+        <br />
+        <button mat-icon-button>
+          <mat-icon>search</mat-icon>
+      </button>
+      <br />
+      <button mat-icon-button [matMenuTriggerFor]="notificationsmenu">
+          <mat-icon>notifications</mat-icon>
+      </button>
+
+      <mat-menu #notificationsmenu="matMenu">
+          <button mat-menu-item>
+              <mat-icon>shopping_cart</mat-icon>Orders received
+          </button>
+          <button *ngIf="pShowUserNav" mat-menu-item>
+              <mat-icon>mail</mat-icon>Mail
+          </button>
+          <button *ngIf="pShowUserNav" mat-menu-item>
+              <mat-icon>message</mat-icon>Message
+          </button>
+      </mat-menu>
+      <br />
+      <button mat-button [matMenuTriggerFor]="usermenu">
+        <mat-icon>account_circle</mat-icon> {{ getUserName() }}
+    </button>
+    <mat-menu #usermenu="matMenu">
+        <button mat-menu-item [routerLink]="['/dashboard']" routerLinkActive="router-link-active">
+            <mat-icon>dashboard</mat-icon>Dashboard
+        </button>
+        <button *ngIf="pShowUserNav" mat-menu-item>
+            <mat-icon>person</mat-icon>Profile
+        </button>
+        <button *ngIf="pShowUserNav" mat-menu-item>
+            <mat-icon>settings</mat-icon>Setting
+        </button>
+        <button *ngIf="pShowUserNav" mat-menu-item [routerLink]="['/changepassword']" routerLinkActive="router-link-active">
+            <mat-icon>lock</mat-icon>Change Password
+        </button>
+        <button mat-menu-item (click)="onSignOut()">
+            <mat-icon>power_settings_new</mat-icon>Sign Out
+        </button>
+    </mat-menu>
+    <br />
+    <div *ngIf="pShowUserNav">
+      <span *ngFor="let item of navItems">
+          <!-- Handle branch node buttons here -->
+          <span *ngIf="item.isParent">
+              <button mat-button [matMenuTriggerFor]="menu.childMenu" [disabled]="item.disabled" >
+                  {{item.displayName}}
+              </button>
+              <br />
+              <app-menu-item #menu [items]="item.children"></app-menu-item>
+          </span>
+          <!-- Leaf node buttons here -->
+          <span *ngIf="!item.isParent">
+              <button mat-button color="White" [routerLink]="item.routeName" >
+                  {{item.displayName}}
+              </button>
+              <br />
+          </span>
+      </span>
+  </div>
+
+    </div>
+
+    <!-- Right Side Menus -->
+
+  </mat-sidenav>
+  <mat-sidenav-content fxFlexFill>
+    <main>
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</div>

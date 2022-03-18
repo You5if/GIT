@@ -1,0 +1,10 @@
+<div *ngFor="let image of dataList">
+  <img [src]="image.apiImagePath" alt="Preview" style="width: 100%;">
+  <p>{{ image.originalFileName }}</p>
+  <button mat-mini-fab color="accent" (click)="onDownload(image.apiPath)" style="margin: 1em;">
+    <mat-icon>cloud_download</mat-icon>
+  </button>
+  <button mat-mini-fab color="warn" *ngIf="role !== '4'" (click)="onDelete(image.fileName)" style="margin: 1em;">
+    <mat-icon>delete</mat-icon>
+  </button>
+</div>

@@ -1,0 +1,56 @@
+<div class="header">
+  <h1 mat-dialog-title>{{dialog_title}} <br>Shipping Company</h1>
+  <mat-icon (click)="onCancel()" color="warn">close</mat-icon>
+</div>
+
+<div mat-dialog-content>
+  <form #sdshippinglinecompaniesForm="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Company</mat-label>
+      <input matInput name="company" type="text" [(ngModel)]="pModel.company" [readonly]="pModel.readOnly" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>State</mat-label>
+      <mat-select matNativeControl name="stateId" [(ngModel)]="stateId" (selectionChange)="onStateChange()">
+        <mat-option *ngFor="let item of statesList" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>City</mat-label>
+      <mat-select matNativeControl name="sdCityId" [(ngModel)]="pModel.sdCityId">
+        <mat-option *ngFor="let item of cityTypes" [value]="item.id">
+          {{item.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <textarea matInput placeholder="Address" maxlength="100" required name="address" #addressInput="ngModel"
+        [(ngModel)]="pModel.address"></textarea>
+      <mat-error *ngIf="addressInput.hasError('required')">Address cannot be blank!</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Mobile</mat-label>
+      <input matInput name="mobile" type="text" [(ngModel)]="pModel.mobile" [readonly]="pModel.readOnly" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput name="email" type="text" [(ngModel)]="pModel.email" [readonly]="pModel.readOnly" required>
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <textarea matInput placeholder="Other Information" required name="otherInformation"
+        [(ngModel)]="pModel.otherInformation"></textarea>
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions class="cta">
+  <div></div>
+  <button *ngIf="pModel.entryMode=='D'" mat-raised-button [disabled]="sdshippinglinecompaniesForm.invalid" type="submit"
+    (click)="onSubmit(sdshippinglinecompaniesForm.value)" color="warn">Delete</button>
+  <button *ngIf="pModel.entryMode=='A' || pModel.entryMode=='E'" mat-raised-button
+    [disabled]="sdshippinglinecompaniesForm.invalid" (click)="onSubmit(sdshippinglinecompaniesForm.value)" type="button"
+    color="accent">Submit</button>
+</div>
