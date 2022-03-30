@@ -281,6 +281,29 @@
         
     
       </div>
+      <div class="midbtns">
+        <button mat-button class="BtnRightSide" [matMenuTriggerFor]="menu">Employees</button>
+        <!-- <button mat-button class="BtnRightSide">Customers</button> -->
+        <div >
+          <app-card-upload [myFiles]="lFiles" (onUploadFinished)="uploadFinished($event)"
+                      
+                      >
+          </app-card-upload>
+        </div>
+        <mat-menu #menu="matMenu" xPosition="after">
+          <div class="employeeCard">
+            
+              <div fxLayout="column">
+                <div *ngFor="let employee of employees" class="employeeNames">
+                  <h4 class="attachments" >{{employee.appUserName}}</h4>
+                  <div *ngIf="role === '2'" class="deleteComment" (click)="onDeleteUser(employee)"><i class="far fa-trash-alt"></i></div>
+                </div>
+              </div>
+              <button *ngIf="role === '2'" class="BtnS" (click)="onAddEmployee()" mat-button color="primary" type="submit">Add</button>
+            
+          </div>
+        </mat-menu>
+      </div>
       <div  class="comment2">
         <div >
         
@@ -346,29 +369,7 @@
       
     </div>
     <div class="secContent2" fxLayoutGap="5px">
-      <div>
-        <button mat-button class="BtnRightSide" [matMenuTriggerFor]="menu">Employees</button>
-        <!-- <button mat-button class="BtnRightSide">Customers</button> -->
-        <div >
-          <app-card-upload [myFiles]="lFiles" (onUploadFinished)="uploadFinished($event)"
-                      
-                      >
-          </app-card-upload>
-        </div>
-        <mat-menu #menu="matMenu" xPosition="after">
-          <div class="employeeCard">
-            
-              <div fxLayout="column">
-                <div *ngFor="let employee of employees" class="employeeNames">
-                  <h4 class="attachments" >{{employee.appUserName}}</h4>
-                  <div *ngIf="role === '2'" class="deleteComment" (click)="onDeleteUser(employee)"><i class="far fa-trash-alt"></i></div>
-                </div>
-              </div>
-              <button *ngIf="role === '2'" class="BtnS" (click)="onAddEmployee()" mat-button color="primary" type="submit">Add</button>
-            
-          </div>
-        </mat-menu>
-      </div>
+      
     </div>
   </div>
   <div class="btn-container" fxLayoutGap="10px">

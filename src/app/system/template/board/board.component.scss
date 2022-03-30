@@ -143,6 +143,10 @@
   width: 100%;
 }
 @media (max-width: 600px) {
+
+  .section{
+    margin-top: 100px;
+  }
   .add_btn {
     background: #20bf6b;
 
@@ -172,12 +176,13 @@
   width: 200px;
   height: 100px;
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  align-items: center;
+  justify-content: center;
   margin-right: 20px;
   cursor: pointer;
   border-radius: 5px;
-  background-color: lightgray;
+  background-color: whitesmoke;
+  border: solid #34495e 3px;
 }
 
 .mainRow {
@@ -199,9 +204,10 @@
 }
 
 .boardName {
-  margin-left: 20px;
+  // margin-left: 20px;
   margin-top: 15px;
   font-weight: bolder;
+  font-size: 21px !important;
 }
 
 .head {

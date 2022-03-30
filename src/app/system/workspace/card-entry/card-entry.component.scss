@@ -2,7 +2,9 @@
 //   opacity: 0.03 !important;
 //   background-color: #911600 !important;
 // }
-
+// *{
+//   outline: solid blue 1px;
+// }
 ::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,
 .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
   background-color: gray;
@@ -31,6 +33,7 @@
 .comment {
   margin-top: 10px;
   margin-bottom: 10px;
+  margin-left: 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -47,10 +50,17 @@
   padding-left: 20px;
   padding-right: 20px;
   width: 100%;
+  margin-left: 60px;
 }
 .attach {
   display: flex;
   width: 100%;
+}
+
+.midbtns{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .attachCard {
@@ -69,8 +79,10 @@
 .employeeCard {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100%;
-
+  padding: 10px;
   border-color: black;
 }
 .commentCard {
@@ -132,15 +144,18 @@
 }
 .employeeNames {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   width: 100%;
   flex-direction: row;
+  margin: 5px 0;
 }
 .deleteComment {
   cursor: pointer;
   margin-left: 10px;
   margin-bottom: 5px;
+  color: red;
+  font-size: 12px!important;
 }
 .sendCommentForm {
   display: flex;

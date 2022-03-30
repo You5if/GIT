@@ -3,12 +3,14 @@
   <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
     <div class="bigMain" fxLayout>
       <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+    
+      <section class="fontY">
+        <!-- <i class="far fa-user"></i> -->
+        {{name}}
+      </section>
     </div>
 
-    <section class="fontY">
-      <!-- <i class="far fa-user"></i> -->
-      {{name}}
-    </section>
+    
 
     <div class="circlesRow">
       <div class="circle" *ngFor='let item of members; let i = index'>
@@ -22,11 +24,11 @@
 </mat-toolbar>
 
 <section class="states">
-  
+  <div #scrollEl cdk-scrollable style="width:400px; overflow-x:scroll">
     <div  fxLayout cdkDropListGroup cdkScrollable >
       <div *ngFor="let state of states" class="example-container">
         <div *ngIf="state.showStateName" class="headTitle">
-          <h2>{{state.stateName}}</h2>
+          <div class="statetitle">{{state.stateName}}</div>
         <div class="editComment" (click)="onEditStateName(state)"><i class="fas fa-pen"></i></div>
         </div>
         <div *ngIf="!state.showStateName" class="headTitle">
@@ -103,9 +105,11 @@
       </div>
     </div> -->
   </div>
+  </div>
+  
+   
   <section class="sec"  *ngIf="role === '2'">
-    <h2>Add list</h2>
-    <button class="add_btn2" *ngIf="Add" mat-button color="primary" (click)="onAddN()" [disabled]="!screenRights.createFlag"><mat-icon>add</mat-icon></button>
+    <button class="add_btn1" *ngIf="Add" mat-button color="primary" (click)="onAddN()" [disabled]="!screenRights.createFlag">Add list</button>
     <mat-form-field *ngIf="!Add" appearance="outline">
       <mat-label>List name</mat-label>
       <input

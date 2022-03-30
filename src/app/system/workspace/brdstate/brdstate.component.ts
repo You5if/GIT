@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { MatDialog, PageEvent, MatTableDataSource, MatDialogRef } from '@angular/material';
 import { CommonService } from 'src/app/components/common/common.service';
 import { UIService } from 'src/app/components/shared/uiservices/UI.service';
@@ -14,20 +14,24 @@ import { SelectModel } from 'src/app/components/misc/SelectModel';
 import { SelectService } from 'src/app/components/common/select.service';
 import { AppGlobals } from 'src/app/app.global';
 import { SystemNavigationComponent } from '../../system-navigation/system-navigation.component';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDragMove, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { last } from '@angular/router/src/utils/collection';
 import { DatePipe, formatDate } from '@angular/common';
 import { AlertifyService } from 'src/app/alertify.service';
 import { Send } from 'src/app/send.model';
 import { CardEntryComponent } from '../card-entry/card-entry.component';
+import { merge, Subscription } from 'rxjs';
+import { startWith, map, switchMap, tap } from 'rxjs/operators';
 
+
+const speed = 10;
 @Component({
     selector: 'app-brdstate',
     templateUrl: './brdstate.component.html',
     styleUrls: ['./brdstate.component.scss']
   })
 
-export class BrdStateComponent implements OnInit {
+export class BrdStateComponent implements OnInit,AfterViewInit,OnDestroy {
 
     displayedColumns: string[] =
         ['brdStateId', 'edit', 'delete', 'view'];
@@ -156,6 +160,14 @@ export class BrdStateComponent implements OnInit {
   
     members:string[] = ['richard rick' , 'alphonse dave' , 'kilin mbappe' , 'brock lesnae' , 'kane wills' , 'Mark angel' , 'astro boy']
     myDate: Date
+
+    @ViewChild('scrollEl')
+  scrollEl:ElementRef<HTMLElement>;
+
+  @ViewChildren(CdkDrag)
+  dragEls:QueryList<CdkDrag>;
+
+  subs = new Subscription();
    
 
     screenRights: RightModel = {
@@ -191,6 +203,72 @@ export class BrdStateComponent implements OnInit {
         this.currentPageIndex = 1;
         this.menuId = 1019106011;
       }
+
+      ngOnDestroy(): void {
+        this.subs.unsubscribe();
+    }
+
+  ngAfterViewInit(){
+            const onMove$ = this.dragEls.changes.pipe(
+            startWith(this.dragEls)
+            , map((d: QueryList<CdkDrag>) => d.toArray())
+            , map(dragels => dragels.map(drag => drag.moved))
+            , switchMap(obs => merge(...obs))
+            , tap(this.triggerScroll)
+        );
+
+        this.subs.add(onMove$.subscribe());
+
+        const onDown$ = this.dragEls.changes.pipe(
+            startWith(this.dragEls)
+            , map((d: QueryList<CdkDrag>) => d.toArray())
+            , map(dragels => dragels.map(drag => drag.ended))
+            , switchMap(obs => merge(...obs))
+            , tap(this.cancelScroll)
+        );
+
+        this.subs.add(onDown$.subscribe());
+  }
+
+  private animationFrame: number | undefined;
+
+    @bound
+    public triggerScroll($event: CdkDragMove) {
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = undefined;
+        }
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+    }
+
+    @bound
+    private cancelScroll() {
+        if (this.animationFrame) {
+            cancelAnimationFrame(this.animationFrame);
+            this.animationFrame = undefined;
+        }
+    }
+
+    private scroll($event: CdkDragMove) {
+      const { x } = $event.pointerPosition;
+      const baseEl = this.scrollEl.nativeElement;
+      const box = baseEl.getBoundingClientRect();
+      const scrollLeft = baseEl.scrollLeft;
+      const left = box.left + -x;
+      if (left > 0 && scrollLeft !== 0) {
+        const newScroll = scrollLeft - speed * Math.exp(left / 50);
+        baseEl.scrollLeft = newScroll;
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+        return;
+      }
+  
+      const right = x - box.right;
+      if (right > 0 && scrollLeft < box.right) {
+        const newScroll = scrollLeft + speed * Math.exp(right / 50);
+        baseEl.scrollLeft = newScroll;
+        this.animationFrame = requestAnimationFrame(() => this.scroll($event));
+      }
+    }
 
   ngOnInit() {
     this.Add = true
@@ -814,4 +892,41 @@ return initials.toUpperCase();
     this._nav.onClickListItem('BO');
   }
 
+}
+
+
+export function bound(target: Object, propKey: string | symbol) {
+  var originalMethod = (target as any)[propKey] as Function;
+
+  // Ensure the above type-assertion is valid at runtime.
+  if (typeof originalMethod !== "function") throw new TypeError("@bound can only be used on methods.");
+
+  if (typeof target === "function") {
+      // Static method, bind to class (if target is of type "function", the method decorator was used on a static method).
+      return {
+          value: function () {
+              return originalMethod.apply(target, arguments);
+          }
+      };
+  } else if (typeof target === "object") {
+      // Instance method, bind to instance on first invocation (as that is the only way to access an instance from a decorator).
+      return {
+          get: function () {
+              // Create bound override on object instance. This will hide the original method on the prototype, and instead yield a bound version from the
+              // instance itself. The original method will no longer be accessible. Inside a getter, 'this' will refer to the instance.
+              var instance = this;
+
+              Object.defineProperty(instance, propKey.toString(), {
+                  value: function () {
+                      // This is effectively a lightweight bind() that skips many (here unnecessary) checks found in native implementations.
+                      return originalMethod.apply(instance, arguments);
+                  }
+              });
+
+              // The first invocation (per instance) will return the bound method from here. Subsequent calls will never reach this point, due to the way
+              // JavaScript runtimes look up properties on objects; the bound method, defined on the instance, will effectively hide it.
+              return instance[propKey];
+          }
+      } as PropertyDescriptor;
+  }
 }

@@ -3,12 +3,13 @@
   <mat-toolbar-row fxLayout.xs="column" fxLayoutGap.xs="20px" [dir]="direction" class="toolbar">
     <div class="bigMain" fxLayout>
       <img (click)="onCancel()" class="cancel_Img" src="../../../../assets/images/svg/arrow (2).png" alt="">
+      <section class="fontY">
+        <!-- <i class="far fa-user"></i> -->
+        {{name}}
+      </section>
     </div>
 
-    <section class="fontY">
-      <!-- <i class="far fa-user"></i> -->
-      {{name}}
-    </section>
+    
 
     <div class="circlesRow">
       <div class="circle" *ngFor='let item of members; let i = index'>
@@ -25,7 +26,10 @@
   
     <div  fxLayout cdkDropListGroup cdkScrollable >
       <div *ngFor="let state of states" class="example-container">
-        <h2>{{state.stateName}}</h2>
+        <div  class="headTitle">
+          <div class="statetitle">{{state.stateName}}</div>
+        
+        </div>
     
         <div
           cdkDropList
